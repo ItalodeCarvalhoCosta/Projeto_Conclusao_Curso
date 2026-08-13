@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Criar treino personalizado</h2>
+
+<h4>Seus dados de perfil:</h4>
+<ul>
+    <li>Peso: {{ perfil.peso }} kg</li>
+    <li>Altura: {{ perfil.altura }} cm</li>
+    <li>Objetivo: {{ perfil.objetivo }}</li>
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}
