@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Biblioteca de exercícios</h1>
+
+    <ul>
+        {% for ex in exercicios %}
+            <li>
+                <a href="{% url 'exercicio_detail' ex.pk %}">{{ ex.nome }}</a>
+                {% if ex.video_url %} - <a href="{{ ex.video_url }}" target="_blank">ver vídeo</a>{% endif %}
+            </li>
+        {% empty %}
+            <li>Nenhum exercício cadastrado.</li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

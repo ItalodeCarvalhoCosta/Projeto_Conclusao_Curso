@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ exercicio.nome }}</h1>
+    <p>{{ exercicio.descricao }}</p>
+
+    {% if exercicio.video_url %}
+        <div class="video-container">
+            <iframe width="560" height="315" src="{{ exercicio.video_url }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

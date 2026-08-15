@@ -3,9 +3,9 @@
 
 {% block nav %}
     
-    <a href="http://localhost:8000/usuarios/registrar/">Cadastrar</a>
+    <a href="{% url 'registrar' %}">Cadastrar</a>
 
-    <a href="http://localhost:8000/usuarios/login/">Login</a>
+    <a href="{% url 'login' %}">Login</a>
     
 {% endblock %}
 

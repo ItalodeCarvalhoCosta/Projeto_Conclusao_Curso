@@ -28,13 +28,17 @@
     </button>
 </form>
 
-       <a href="http://localhost:8000/usuarios/perfil/">
-        Perfil
-        </a>
+    <a href="{% url 'perfil' %}">
+     Perfil
+     </a>
 
-        <a href="">
-            Treino
-        </a>
+           <a href="{% url 'criar_ficha' %}">
+                Treino
+            </a>
+
+            <a href="{% url 'biblioteca' %}">
+                Biblioteca
+            </a>
 
         <a href="">
             Dieta
