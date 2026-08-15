@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Registrar progresso | PlanoFit</title>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Editar dados de hoje</h1>
+
+    <p>
+        Informe seus dados de hoje.
+    </p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <div>
+            <label for="{{ form.peso.id_for_label }}">
+                Peso (kg)
+            </label>
+
+            {{ form.peso }}
+
+            {{ form.peso.errors }}
+        </div>
+
+
+        <div>
+            <label for="{{ form.agua.id_for_label }}">
+                Água consumida (L)
+            </label>
+
+            {{ form.agua }}
+
+            {{ form.agua.errors }}
+        </div>
+
+
+        <div>
+            <label for="{{ form.tempo_cardio.id_for_label }}">
+                Tempo de cardio (min)
+            </label>
+
+            {{ form.tempo_cardio }}
+
+            {{ form.tempo_cardio.errors }}
+        </div>
+
+
+        <div>
+            {{ form.seguiu_dieta }}
+
+            <label for="{{ form.seguiu_dieta.id_for_label }}">
+                Segui minha dieta hoje
+            </label>
+        </div>
+
+
+        <div>
+            {{ form.realizou_treino }}
+
+            <label for="{{ form.realizou_treino.id_for_label }}">
+                Realizei meu treino hoje
+            </label>
+        </div>
+
+
+        <button type="submit">
+            Salvar
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

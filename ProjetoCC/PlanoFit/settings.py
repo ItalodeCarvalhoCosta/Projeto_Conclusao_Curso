@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -121,7 +122,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'templates/static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 AUTH_USER_MODEL = "usuarios.Usuario"
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'dashboard'   # ajuste para o nome da rota do monitoramento
+LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL = 'monitoramento:dashboard'   # ajuste para o nome da rota do monitoramento
 LOGOUT_REDIRECT_URL = 'login'

@@ -7,3 +7,8 @@ class RegistroForm(UserCreationForm):
     class Meta:
         model = Usuario
         fields = ('email', 'nome')
+
+class PerfilForm(forms.ModelForm):
+            class Meta:
+                model = Usuario
+                fields = ('nome', 'altura', 'email', 'sexo' )

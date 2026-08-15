@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>Dashboard | PlanoFit</title>
+
+    <!-- CSS específico do Dashboard -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+
+{% block nav %}
+    <nav>
+
+        <form
+    method="POST"
+    action="{% url 'logout' %}"
+    class="form-logout"
+>
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="botao-logout"
+    >
+        Sair
+    </button>
+</form>
+
+       <a href="http://localhost:8000/usuarios/perfil/">
+        Perfil
+        </a>
+
+        <a href="">
+            Treino
+        </a>
+
+        <a href="">
+            Dieta
+        </a>
+
+    </nav>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <div class="cabecalho-dashboard">
+
+        <div>
+            <h1>Olá, {{ user.nome }}!</h1>
+
+            <p>Acompanhe seu progresso.</p>
+        </div>
+
+        <!-- BOTÃO PARA O CADASTRO DIÁRIO -->
+{% if registro_hoje %}
+<div class="botao-cadastro-container">
+    <a
+        href="{% url 'monitoramento:editar' %}"
+        class="botao-cadastro"
+    >
+        Editar dados de hoje
+    </a>
+</div>
+{% else %}
+<div class="botao-cadastro-container">
+    <a
+        href="{% url 'monitoramento:cadastrar' %}"
+        class="botao-cadastro"
+    >
+        Registrar dados de hoje
+    </a>
+</div>
+
+{% endif %}
+
+    </div>
+
+
+    <!-- CARDS DE INFORMAÇÕES -->
+
+    <div class="row">
+
+        <div class="col-md informacoes_basicas">
+
+            <h2>Peso</h2>
+
+            <h1>
+                {{ peso_atual|default:"--" }} kg
+            </h1>
+
+        </div>
+
+
+        <div class="col-md informacoes_basicas">
+
+            <h2>IMC</h2>
+
+            <h1>
+                {{ imc|default:"--" }}
+            </h1>
+
+        </div>
+
+
+        <div class="col-md informacoes_basicas">
+
+            <h2>Água hoje</h2>
+
+            <h1>
+                {{ agua_hoje|default:"0" }} L
+            </h1>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md informacoes_basicas">
+
+            <h2>Dias seguindo a dieta</h2>
+
+            <h1>
+                {{ dias_dieta|default:"0" }}
+            </h1>
+
+        </div>
+
+
+        <div class="col-md informacoes_basicas">
+
+            <h2>Dias treinados</h2>
+
+            <h1>
+                {{ dias_treino|default:"0" }}
+            </h1>
+
+        </div>
+
+
+        <div class="col-md informacoes_basicas">
+
+            <h2>Tempo de cardio</h2>
+
+            <h1>
+                {{ tempo_cardio|default:"0" }} min
+            </h1>
+
+        </div>
+
+    </div>
+
+
+    <!-- GRÁFICOS -->
+
+   <div class="row">
+
+    <div class="col-md">
+    
+
+        <div class="calendarios-adesao">
+
+            <div class="calendario-container">
+
+                <h3>Dieta</h3>
+
+                <div id="calendario_dieta"></div>
+
+            </div>
+
+
+            <div class="calendario-container">
+
+                <h3>Treino</h3>
+
+                <div id="calendario_treino"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    <div class="row">
+
+                <div class="col-md">
+
+            <h2>Peso</h2>
+
+            <canvas
+                id="grafico_peso"
+                width="250"
+                height="200">
+            </canvas>
+
+        </div>
+
+        <div class="col-md">
+
+            <h2>Tempo de cardio</h2>
+
+            <canvas
+                id="grafico_cardio"
+                width="250"
+                height="200">
+            </canvas>
+
+        </div>
+
+
+        <div class="col-md">
+
+            <h2>Consumo de água</h2>
+
+            <canvas
+                id="grafico_agua"
+                width="250"
+                height="200">
+            </canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Biblioteca Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- JavaScript específico do Dashboard -->
+<script src="{% static 'js/dashboard.js' %}"></script>
+
+
+<script>
+    window.onload = function() {
+
+        renderiza_grafico_agua(
+            "{% url 'monitoramento:dados_agua' %}"
+        );
+
+        renderiza_grafico_cardio(
+            "{% url 'monitoramento:dados_cardio' %}"
+        );
+
+       renderiza_calendario_adesao(
+             "{% url 'monitoramento:dados_adesao' %}"
+        );
+        renderiza_grafico_peso(
+            "{% url 'monitoramento:dados_peso' %}"
+        );
+
+    }
+</script>
+
+{% endblock %}

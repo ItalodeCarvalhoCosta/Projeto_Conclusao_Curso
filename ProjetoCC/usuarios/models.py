@@ -22,6 +22,23 @@ class Usuario(AbstractUser):
     username = None  # removemos o username padrão
     email = models.EmailField('email', unique=True)
     nome = models.CharField('nome completo', max_length=150)
+    altura = models.DecimalField(
+        'altura em metros',
+        max_digits=3,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
+    
+
+    SEXO_CHOICES = [('M', 'Masculino'), ('F', 'Feminino'), ]
+    sexo = models.CharField(
+        'sexo',
+        max_length=1,
+        choices=SEXO_CHOICES,
+        null=True,
+        blank=True
+    )
 
     USERNAME_FIELD = 'email'   # login será feito com email
     REQUIRED_FIELDS = ['nome']  # pedido ao criar superuser
