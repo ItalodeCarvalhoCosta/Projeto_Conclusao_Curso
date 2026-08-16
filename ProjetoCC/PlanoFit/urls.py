@@ -24,5 +24,6 @@ urlpatterns = [
     path('treino/', include('treino.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('dashboard/', include('monitoramento.urls')),
+    path('dieta/', include('dieta.urls')),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
 ]

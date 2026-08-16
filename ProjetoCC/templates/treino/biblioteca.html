@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+    <nav>
+        <a href="{% url 'monitoramento:dashboard' %}" class="navbar-brand">PlanoFit</a>
+
+        <form method="POST" action="{% url 'logout' %}" class="form-logout">
+            {% csrf_token %}
+            <button type="submit" class="botao-logout">Sair</button>
+        </form>
+
+        <a href="{% url 'perfil' %}">Perfil</a>
+        <a href="{% url 'criar_ficha' %}">Treino</a>
+        <a href="{% url 'biblioteca' %}">Biblioteca</a>
+    </nav>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>Biblioteca de exercícios</h1>
+    <p>Escolha um exercício para ver a descrição e o vídeo demonstrativo.</p>
 
-    <ul>
+    <ul class="lista-cards">
         {% for ex in exercicios %}
             <li>
                 <a href="{% url 'exercicio_detail' ex.pk %}">{{ ex.nome }}</a>
-                {% if ex.video_url %} - <a href="{{ ex.video_url }}" target="_blank">ver vídeo</a>{% endif %}
+                {% if ex.video_url %}
+                    <a href="{{ ex.video_url }}" target="_blank" class="video-link">ver vídeo</a>
+                {% endif %}
             </li>
         {% empty %}
             <li>Nenhum exercício cadastrado.</li>

@@ -2,21 +2,32 @@
 
 
 {% block nav %}
-    
-    <a href="{% url 'registrar' %}">Cadastrar</a>
+    <nav>
+        <a href="{% url 'inicio' %}" class="navbar-brand">PlanoFit</a>
 
-    <a href="{% url 'login' %}">Login</a>
-    
+        <a href="{% url 'registrar' %}">Cadastrar</a>
+
+        <a href="{% url 'login' %}">Login</a>
+    </nav>
 {% endblock %}
 
 
 {% block content %}
 
-    <h1>Bem-vindo ao PlanoFit!</h1>
+    <div class="hero">
 
-    <p>
-        Tenha acesso a dietas, treinos e acompanhamento
-        do seu progresso.
-    </p>
+        <h1>Bem-vindo ao PlanoFit!</h1>
+
+        <p>
+            Tenha acesso a dietas, treinos e acompanhamento
+            do seu progresso.
+        </p>
+
+        <div class="hero-actions">
+            <a href="{% url 'registrar' %}" class="btn btn-primary">Criar conta</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary">Entrar</a>
+        </div>
+
+    </div>
 
 {% endblock %}

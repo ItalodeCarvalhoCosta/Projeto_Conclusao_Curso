@@ -6,9 +6,25 @@
 {% endblock %}
 
 
+{% block nav %}
+    <nav>
+        <a href="{% url 'monitoramento:dashboard' %}" class="navbar-brand">PlanoFit</a>
+
+        <form method="POST" action="{% url 'logout' %}" class="form-logout">
+            {% csrf_token %}
+            <button type="submit" class="botao-logout">Sair</button>
+        </form>
+
+        <a href="{% url 'monitoramento:dashboard' %}">Dashboard</a>
+        <a href="{% url 'criar_ficha' %}">Treino</a>
+        <a href="{% url 'biblioteca' %}">Biblioteca</a>
+    </nav>
+{% endblock %}
+
+
 {% block content %}
 
-<div class="container">
+<div class="form-card">
 
     <h1>Meu perfil</h1>
 

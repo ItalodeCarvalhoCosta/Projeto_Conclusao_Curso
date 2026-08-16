@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
+
+{% block nav %}
+    <nav>
+        <a href="{% url 'inicio' %}" class="navbar-brand">PlanoFit</a>
+    </nav>
+{% endblock %}
+
 {% block content %}
-<h2>Entrar</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Entrar</button>
-</form>
-<p>Não tem conta? <a href="{% url 'registrar' %}">Cadastre-se</a></p>
+<div class="form-card">
+    <h2>Entrar</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Entrar</button>
+    </form>
+    <p class="form-footer">Não tem conta? <a href="{% url 'registrar' %}">Cadastre-se</a></p>
+</div>
 {% endblock %}

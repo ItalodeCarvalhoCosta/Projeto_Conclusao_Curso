@@ -9,6 +9,9 @@ class RegistroForm(UserCreationForm):
         fields = ('email', 'nome')
 
 class PerfilForm(forms.ModelForm):
-            class Meta:
-                model = Usuario
-                fields = ('nome', 'altura', 'email', 'sexo' )
+    class Meta:
+        model = Usuario
+        fields = ('nome', 'altura', 'email', 'sexo', 'data_nascimento', 'nivel_atividade', 'objetivo')
+        widgets = {
+            'data_nascimento': forms.DateInput(attrs={'type': 'date'}),
+        }

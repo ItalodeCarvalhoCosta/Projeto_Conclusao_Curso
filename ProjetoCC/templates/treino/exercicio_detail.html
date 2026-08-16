@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+    <nav>
+        <a href="{% url 'monitoramento:dashboard' %}" class="navbar-brand">PlanoFit</a>
+
+        <form method="POST" action="{% url 'logout' %}" class="form-logout">
+            {% csrf_token %}
+            <button type="submit" class="botao-logout">Sair</button>
+        </form>
+
+        <a href="{% url 'perfil' %}">Perfil</a>
+        <a href="{% url 'criar_ficha' %}">Treino</a>
+        <a href="{% url 'biblioteca' %}">Biblioteca</a>
+    </nav>
+{% endblock %}
+
 {% block content %}
 <div class="container">
+    <p><a href="{% url 'biblioteca' %}">&larr; Voltar para a biblioteca</a></p>
+
     <h1>{{ exercicio.nome }}</h1>
     <p>{{ exercicio.descricao }}</p>
 
     {% if exercicio.video_url %}
         <div class="video-container">
-            <iframe width="560" height="315" src="{{ exercicio.video_url }}" frameborder="0" allowfullscreen></iframe>
+            <iframe src="{{ exercicio.video_url }}" frameborder="0" allowfullscreen></iframe>
         </div>
     {% endif %}
 

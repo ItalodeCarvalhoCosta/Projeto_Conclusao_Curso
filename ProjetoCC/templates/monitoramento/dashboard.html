@@ -4,14 +4,13 @@
 
 {% block title %}
     <title>Dashboard | PlanoFit</title>
-
-    <!-- CSS específico do Dashboard -->
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
 
 
 {% block nav %}
     <nav>
+
+        <a href="{% url 'monitoramento:dashboard' %}" class="navbar-brand">PlanoFit</a>
 
         <form
     method="POST"
@@ -40,9 +39,9 @@
                 Biblioteca
             </a>
 
-        <a href="">
-            Dieta
-        </a>
+        <a href="{% url 'dieta:meu_plano' %}">
+    Dieta
+</a>
 
     </nav>
 {% endblock %}

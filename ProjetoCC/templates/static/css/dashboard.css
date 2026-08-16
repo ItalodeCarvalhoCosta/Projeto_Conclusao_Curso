@@ -319,3 +319,344 @@ nav .botao-logout {
 nav .botao-logout:hover {
     color: #cccccc;
 }
+
+nav .navbar-brand {
+    margin-right: auto;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+nav .navbar-brand:hover {
+    color: #cccccc;
+}
+
+
+/* =========================
+   PÁGINA INICIAL (HERO)
+========================= */
+
+.hero {
+    max-width: 640px;
+    margin: 90px auto;
+    padding: 0 24px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 32px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+
+/* =========================
+   BOTÕES GERAIS
+========================= */
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #198754;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #157347;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    background-color: white;
+    color: #198754;
+    border: 2px solid #198754;
+}
+
+.btn-secondary:hover {
+    background-color: #f0fdf6;
+}
+
+
+/* =========================
+   CARD DE FORMULÁRIO (login, cadastro)
+========================= */
+
+.form-card {
+    max-width: 420px;
+    margin: 60px auto;
+    background: white;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.form-card.form-card-wide {
+    max-width: 640px;
+}
+
+.form-card h1,
+.form-card h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.form-footer {
+    margin-top: 20px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.form-footer a {
+    color: #198754;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   ESTILO GERAL DE FORMULÁRIOS
+========================= */
+
+form p {
+    margin: 0 0 16px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+    font-size: 14px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #198754;
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+}
+
+form ul.errorlist {
+    list-style: none;
+    color: #d33;
+    font-size: 13px;
+    margin: 4px 0 0;
+    padding: 0;
+}
+
+form small,
+form .helptext {
+    display: block;
+    color: #888;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #198754;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-top: 4px;
+}
+
+form button[type="submit"]:hover {
+    background-color: #157347;
+}
+
+/* linhas com checkbox (ex: "segui minha dieta hoje") não devem ocupar 100% */
+form div > label {
+    display: inline;
+    font-weight: normal;
+    margin-left: 6px;
+    color: #222;
+}
+
+form div:has(> input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+form div:has(> input[type="checkbox"]) input {
+    width: auto;
+}
+
+
+/* =========================
+   LISTA DE EXERCÍCIOS (biblioteca)
+========================= */
+
+.lista-cards {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lista-cards li {
+    background: white;
+    padding: 16px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.lista-cards a {
+    color: #198754;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.lista-cards a:hover {
+    text-decoration: underline;
+}
+
+.lista-cards .video-link {
+    font-size: 13px;
+    color: #666;
+}
+
+
+/* =========================
+   VÍDEO DO EXERCÍCIO
+========================= */
+
+.video-container {
+    margin-top: 20px;
+}
+
+.video-container iframe {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border-radius: 10px;
+    border: none;
+}
+
+
+/* =========================
+   RESUMO DE PERFIL (dentro de criar treino)
+========================= */
+
+.perfil-resumo {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.perfil-resumo li {
+    background: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+    color: #444;
+}
+/* =========================
+   ALERTA / AVISO
+========================= */
+
+.alerta {
+    background: #fff8e1;
+    border: 1px solid #f0d98a;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    color: #6b5900;
+}
+
+.alerta p {
+    margin: 0 0 6px;
+}
+
+.alerta p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================
+   SUGESTÃO NUTRICIONAL CALCULADA
+========================= */
+
+.sugestao-nutricional {
+    background: #f0fdf6;
+    border: 1px solid #b7e4c7;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.sugestao-nutricional > p:first-child {
+    margin-top: 0;
+}
+
+.sugestao-nutricional .row {
+    margin-bottom: 8px;
+}
+
+.sugestao-nutricional .col-md {
+    box-shadow: none;
+    border: 1px solid #d7ecdf;
+}
