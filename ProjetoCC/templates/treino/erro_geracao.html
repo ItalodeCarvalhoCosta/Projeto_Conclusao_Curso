@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Não conseguimos gerar seu treino agora</h2>
+<p>Seus dados foram salvos. Tente novamente em alguns minutos.</p>
+<a href="{% url 'criar_treino' %}">Tentar novamente</a>
+{% endblock %}

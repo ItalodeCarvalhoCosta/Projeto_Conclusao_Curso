@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ ficha.nome }}</h2>
+<p>Objetivo: {{ ficha.objetivo }}</p>
+<p>Nível: {{ ficha.get_nivel_display }}</p>
+
+<table>
+    <thead>
+        <tr><th>Exercício</th><th>Séries</th><th>Repetições</th></tr>
+    </thead>
+    <tbody>
+        {% for item in itens %}
+        <tr>
+            <td>{{ item.exercicio.nome }}</td>
+            <td>{{ item.series }}</td>
+            <td>{{ item.repeticoes }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

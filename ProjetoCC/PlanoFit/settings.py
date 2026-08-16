@@ -132,3 +132,7 @@ AUTH_USER_MODEL = "usuarios.Usuario"
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL = 'monitoramento:dashboard'   # ajuste para o nome da rota do monitoramento
 LOGOUT_REDIRECT_URL = 'login'
+
+from decouple import config
+
+OPENAI_API_KEY = config('OPENAI_API_KEY', default='')

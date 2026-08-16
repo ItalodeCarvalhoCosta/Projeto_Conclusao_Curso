@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Treino, Exercicio, FichaTreino, FichaExercicio
+from .models import SolicitacaoTreino, Exercicio, FichaTreino, FichaExercicio
 
 
-@admin.register(Treino)
-class TreinoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'grupo_muscular', 'nivel', 'series', 'repeticoes')
-    search_fields = ('nome', 'grupo_muscular')
-    list_filter = ('nivel', 'grupo_muscular')
+@admin.register(SolicitacaoTreino)
+class SolicitacaoTreinoAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'objetivo_principal', 'nivel_experiencia', 'criado_em')
+    search_fields = ('usuario__username', 'objetivo_principal')
+    list_filter = ('nivel_experiencia', 'objetivo_principal')
 
 
 @admin.register(Exercicio)
