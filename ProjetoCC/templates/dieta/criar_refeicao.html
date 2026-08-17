@@ -22,7 +22,9 @@
 
 {% block content %}
 <div class="container">
-    <p><a href="{% url 'dieta:meu_plano' %}">&larr; Voltar para o plano</a></p>
+    <a href="{% url 'dieta:meu_plano' %}" class="botao-cadastro">
+    ← Voltar para o plano
+</a>
 
     <h1>{% if editando %}Editar refeição{% else %}Nova refeição{% endif %}</h1>
 

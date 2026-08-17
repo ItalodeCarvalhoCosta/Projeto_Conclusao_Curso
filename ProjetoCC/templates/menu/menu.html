@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+{% endblock %}
 
 
 {% block nav %}
@@ -16,7 +21,9 @@
 
     <div class="hero">
 
-        <h1>Bem-vindo ao PlanoFit!</h1>
+        <div class="caixamenu">
+
+                    <h1>Bem-vindo ao PlanoFit!</h1>
 
         <p>
             Tenha acesso a dietas, treinos e acompanhamento
@@ -27,6 +34,10 @@
             <a href="{% url 'registrar' %}" class="btn btn-primary">Criar conta</a>
             <a href="{% url 'login' %}" class="btn btn-secondary">Entrar</a>
         </div>
+
+        </div>
+
+
 
     </div>
 

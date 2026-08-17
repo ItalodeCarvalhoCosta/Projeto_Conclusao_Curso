@@ -26,24 +26,56 @@
     <h1>{{ plano.nome }}</h1>
     <p>Acompanhe suas refeições planejadas.</p>
 
-    <div class="row">
-        <div class="col-md informacoes_basicas">
-            <h2>Calorias</h2>
-            <h1>{{ totais.calorias }}{% if plano.calorias_meta %} / {{ plano.calorias_meta }}{% endif %}</h1>
-        </div>
-        <div class="col-md informacoes_basicas">
-            <h2>Proteína</h2>
-            <h1>{{ totais.proteina }}g</h1>
-        </div>
-        <div class="col-md informacoes_basicas">
-            <h2>Carboidrato</h2>
-            <h1>{{ totais.carboidrato }}g</h1>
-        </div>
-        <div class="col-md informacoes_basicas">
-            <h2>Gordura</h2>
-            <h1>{{ totais.gordura }}g</h1>
-        </div>
+<div class="row">
+
+    <div class="col-md informacoes_basicas">
+        <h2>Calorias</h2>
+
+        <h1>
+            {{ totais.calorias }}
+            {% if plano.calorias_meta %}
+                / {{ plano.calorias_meta }}
+            {% endif %}
+        </h1>
     </div>
+
+
+    <div class="col-md informacoes_basicas">
+        <h2>Proteína</h2>
+
+        <h1>
+            {{ totais.proteina }}g
+            {% if plano.proteina_meta %}
+                / {{ plano.proteina_meta }}g
+            {% endif %}
+        </h1>
+    </div>
+
+
+    <div class="col-md informacoes_basicas">
+        <h2>Carboidrato</h2>
+
+        <h1>
+            {{ totais.carboidrato }}g
+            {% if plano.carboidrato_meta %}
+                / {{ plano.carboidrato_meta }}g
+            {% endif %}
+        </h1>
+    </div>
+
+
+    <div class="col-md informacoes_basicas">
+        <h2>Gordura</h2>
+
+        <h1>
+            {{ totais.gordura }}g
+            {% if plano.gordura_meta %}
+                / {{ plano.gordura_meta }}g
+            {% endif %}
+        </h1>
+    </div>
+
+</div>
 
     <div class="botao-cadastro-container">
         <a href="{% url 'dieta:criar_refeicao' %}" class="botao-cadastro">+ Adicionar refeição</a>
