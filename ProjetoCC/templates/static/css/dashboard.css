@@ -478,8 +478,8 @@ form input:focus,
 form select:focus,
 form textarea:focus {
     outline: none;
-    border-color: #198754;
-    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+    border-color: #8a37a9;
+    box-shadow: 0 0 0 3px rgba(169, 71, 205, 0.15);
 }
 
 form ul.errorlist {
@@ -501,7 +501,7 @@ form .helptext {
 form button[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #198754;
+    background-color: #A947CD;
     color: white;
     border: none;
     border-radius: 8px;
@@ -513,7 +513,7 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-    background-color: #157347;
+    background-color: #8a37a9;
 }
 
 /* linhas com checkbox (ex: "segui minha dieta hoje") não devem ocupar 100% */

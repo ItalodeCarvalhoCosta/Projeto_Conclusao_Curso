@@ -3,6 +3,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    
 {% endblock %}
 
 
@@ -19,26 +20,44 @@
 
 {% block content %}
 
-    <div class="hero">
+
+<div class="hero">
+
+    <div class="hero-container">
+
+        <div class="hero-image">
+            <img
+                src="{% static 'imgs/img_menu.jpeg' %}"
+                alt="Imagem de destaque"
+            >
+        </div>
 
         <div class="caixamenu">
 
-                    <h1>Bem-vindo ao PlanoFit!</h1>
+            <h1>Bem-vindo ao PlanoFit!</h1>
 
-        <p>
-            Tenha acesso a dietas, treinos e acompanhamento
-            do seu progresso.
-        </p>
+            <p>
+                Tenha acesso a dietas, treinos e acompanhamento
+                do seu progresso.
+            </p>
 
-        <div class="hero-actions">
-            <a href="{% url 'registrar' %}" class="btn btn-primary">Criar conta</a>
-            <a href="{% url 'login' %}" class="btn btn-secondary">Entrar</a>
+            <div class="hero-actions">
+
+                <a href="{% url 'registrar' %}"
+                   class="btn btn-primary">
+                    Criar conta
+                </a>
+
+                <a href="{% url 'login' %}"
+                   class="btn btn-secondary">
+                    Entrar
+                </a>
+
+            </div>
+
         </div>
-
-        </div>
-
-
 
     </div>
 
+</div>
 {% endblock %}

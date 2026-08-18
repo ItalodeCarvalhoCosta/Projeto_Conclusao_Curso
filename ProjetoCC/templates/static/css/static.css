@@ -185,12 +185,12 @@ nav .botao-logout:hover {
 
 
 .btn-primary {
-    background-color: #198754;
+    background-color: #A947CD;
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #157347;
+    background-color: #8a37a9;
 
     transform: translateY(-2px);
 
@@ -201,13 +201,13 @@ nav .botao-logout:hover {
 .btn-secondary {
     background-color: white;
 
-    color: #198754;
+    color: #A947CD;
 
-    border: 2px solid #198754;
+    border: 2px solid #b237df;
 }
 
 .btn-secondary:hover {
-    background-color: #f0fdf6;
+    background-color: #f7dfff;
 }
 
 
@@ -255,9 +255,9 @@ form select:focus,
 form textarea:focus {
     outline: none;
 
-    border-color: #198754;
+    border-color: #A947CD;
 
-    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+    box-shadow: 0 0 0 3px rgba(169, 71, 205, 0.15);
 }
 
 
@@ -290,7 +290,7 @@ form button[type="submit"] {
 
     padding: 12px;
 
-    background-color: #198754;
+    background-color: #A947CD;
     color: white;
 
     border: none;
@@ -307,7 +307,7 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-    background-color: #157347;
+    background-color: #8a37a9;
 }
 
 
