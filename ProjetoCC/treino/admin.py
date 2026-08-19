@@ -1,26 +1,27 @@
 from django.contrib import admin
-from .models import SolicitacaoTreino, Exercicio, FichaTreino, FichaExercicio
-
-
-@admin.register(SolicitacaoTreino)
-class SolicitacaoTreinoAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'objetivo_principal', 'nivel_experiencia', 'criado_em')
-    search_fields = ('usuario__username', 'objetivo_principal')
-    list_filter = ('nivel_experiencia', 'objetivo_principal')
+from .models import PerfilTreino, TreinoPersonalizado, Exercicio
 
 
 @admin.register(Exercicio)
 class ExercicioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'criado_por', 'criado_em')
+    """
+    Aqui é onde VOCÊ (administrador) cadastra os exercícios da
+    biblioteca: nome, imagem, grupo muscular e link do YouTube.
+    O usuário comum não tem acesso a essa tela.
+    """
+    list_display = ('nome', 'grupo_muscular', 'link_youtube')
+    list_filter = ('grupo_muscular',)
     search_fields = ('nome',)
 
 
-class FichaExercicioInline(admin.TabularInline):
-    model = FichaExercicio
-    extra = 1
+@admin.register(PerfilTreino)
+class PerfilTreinoAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'objetivo', 'nivel_experiencia', 'criado_em')
+    list_filter = ('objetivo', 'nivel_experiencia', 'genero')
+    search_fields = ('usuario__username',)
 
 
-@admin.register(FichaTreino)
-class FichaTreinoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'usuario', 'objetivo', 'nivel', 'criado_em')
-    inlines = (FichaExercicioInline,)
+@admin.register(TreinoPersonalizado)
+class TreinoPersonalizadoAdmin(admin.ModelAdmin):
+    list_display = ('perfil', 'criado_em')
+    readonly_fields = ('conteudo_texto', 'conteudo_json', 'criado_em')

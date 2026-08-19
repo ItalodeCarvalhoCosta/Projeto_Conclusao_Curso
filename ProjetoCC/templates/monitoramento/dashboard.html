@@ -35,17 +35,20 @@
      Perfil
      </a>
 
-           <a href="{% url 'criar_ficha' %}">
-                Treino
-            </a>
+        <a href="{% url 'treino:criar_perfil' %}">
+            Criar ficha
+        </a>
 
-            <a href="{% url 'biblioteca' %}">
-                Biblioteca
-            </a>
+        <a href="{% url 'treino:meus_treinos' %}">
+            Meus treinos
+        </a>
 
+        <a href="{% url 'treino:biblioteca' %}">
+            Biblioteca
+        </a>
         <a href="{% url 'dieta:meu_plano' %}">
-    Dieta
-</a>
+         Dieta
+        </a>
 
     </nav>
 {% endblock %}

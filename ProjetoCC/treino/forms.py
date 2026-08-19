@@ -1,31 +1,17 @@
 from django import forms
-from .models import SolicitacaoTreino, FichaTreino, Exercicio
+from .models import PerfilTreino
 
 
-class SolicitacaoTreinoForm(forms.ModelForm):
+class PerfilTreinoForm(forms.ModelForm):
+    """
+    Formulário que o usuário preenche com peso, altura, idade, objetivo,
+    etc. O campo `usuario` é setado na view (request.user), não aqui.
+    """
+
     class Meta:
-        model = SolicitacaoTreino
-        fields = [
-            'peso', 'altura', 'idade', 'genero', 'percentual_gordura',
-            'nivel_experiencia', 'objetivo_principal', 'frequencia_semanal',
-            'tempo_por_sessao', 'lesoes_dores',
-        ]
+        model = PerfilTreino
+        exclude = ['usuario', 'criado_em', 'atualizado_em']
         widgets = {
-            'lesoes_dores': forms.Textarea(attrs={
-                'rows': 4,
-                'placeholder': 'Ex: tenho dor no joelho, prefiro treinar em casa...'
-            }),
+            'problemas_saude': forms.Textarea(attrs={'rows': 3}),
+            'lesoes_dores': forms.Textarea(attrs={'rows': 3}),
         }
-
-
-class FichaTreinoForm(forms.ModelForm):
-    exercicios = forms.ModelMultipleChoiceField(
-        queryset=Exercicio.objects.all(),
-        required=False,
-        widget=forms.CheckboxSelectMultiple,
-        help_text='Escolha exercícios da biblioteca para incluir na ficha'
-    )
-
-    class Meta:
-        model = FichaTreino
-        fields = ('nome', 'objetivo', 'nivel', 'exercicios')

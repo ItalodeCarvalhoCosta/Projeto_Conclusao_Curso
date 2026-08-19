@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/criar_perfil.css' %}">
+{% endblock %}
+
+{% block title %}
+    <title>Criar ficha de treino | PlanoFit</title>
+{% endblock %}
+
+{% block content %}
+
+<main class="pagina-ficha">
+
+    <div class="ficha-card">
+
+        <div class="ficha-header">
+            <h1>Criar ficha de treino</h1>
+
+            <p>
+                Preencha seus dados para gerar um treino adequado ao seu perfil.
+            </p>
+        </div>
+
+        <form method="POST" class="ficha-form">
+
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="form-errors">
+
+                    <p>Corrija os erros abaixo:</p>
+
+                    {% for field in form %}
+
+                        {% for error in field.errors %}
+
+                            <p>
+                                <strong>{{ field.label }}:</strong>
+                                {{ error }}
+                            </p>
+
+                        {% endfor %}
+
+                    {% endfor %}
+
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+            {% endif %}
+
+
+            <div class="form-grid">
+
+                {% for field in form %}
+
+                    <div class="form-group
+                        {% if field.name == 'problemas_saude' %}
+                            campo-grande
+                        {% endif %}
+                    ">
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.help_text %}
+                            <small class="help-text">
+                                {{ field.help_text }}
+                            </small>
+                        {% endif %}
+
+                        {% if field.errors %}
+
+                            <div class="field-errors">
+
+                                {% for error in field.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'monitoramento:dashboard' %}"
+                    class="btn-cancelar"
+                >
+                    Cancelar
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn-salvar"
+                >
+                    Criar ficha
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Meus treinos | PlanoFit</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/treino.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="pagina-treinos">
+
+    <div class="treinos-container">
+        <div class="area-voltar">
+    <a
+        href="{% url 'monitoramento:dashboard' %}"
+        class="btn-voltar"
+    >
+        ← Voltar
+    </a>
+</div>
+
+        <header class="pagina-header">
+
+            <div>
+                <span class="pagina-tag">
+                    PlanoFit
+                </span>
+
+                <h1>Meus treinos</h1>
+
+                <p>
+                    Consulte os treinos personalizados gerados
+                    a partir das suas fichas.
+                </p>
+            </div>
+
+            <a
+                href="{% url 'treino:criar_perfil' %}"
+                class="btn-principal"
+            >
+                + Novo treino
+            </a>
+
+        </header>
+
+
+        {% if treinos %}
+
+            <div class="treinos-grid">
+
+                {% for treino in treinos %}
+
+                    <article class="treino-card">
+
+                        <div class="treino-card-topo">
+
+                            <div class="treino-icone">
+                                {{ forloop.counter|stringformat:"02d" }}
+                            </div>
+
+                            <div class="treino-info">
+
+                                <span class="treino-label">
+                                    Treino personalizado
+                                </span>
+
+                                <h2>
+                                    Treino #{{ treino.id }}
+                                </h2>
+
+                                <span class="treino-data">
+                                    Gerado em
+                                    {{ treino.criado_em|date:"d/m/Y" }}
+                                    às
+                                    {{ treino.criado_em|date:"H:i" }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="treino-detalhes">
+
+                            <div class="detalhe">
+                                <span>Objetivo</span>
+
+                                <strong>
+                                    {{ treino.perfil.get_objetivo_display }}
+                                </strong>
+                            </div>
+
+
+                            <div class="detalhe">
+                                <span>Nível</span>
+
+                                <strong>
+                                    {{ treino.perfil.get_nivel_experiencia_display }}
+                                </strong>
+                            </div>
+
+
+                            <div class="detalhe">
+                                <span>Frequência</span>
+
+                                <strong>
+                                    {{ treino.perfil.frequencia_semanal }}
+                                    dias/semana
+                                </strong>
+                            </div>
+
+
+                            <div class="detalhe">
+                                <span>Duração</span>
+
+                                <strong>
+                                    {{ treino.perfil.tempo_por_sessao }}
+                                    minutos
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="treino-card-acoes">
+
+                            <a
+                                href="{% url 'treino:ver_treino' treino.id %}"
+                                class="btn-ver-treino"
+                            >
+                                Ver treino
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <section class="estado-vazio">
+
+                <div class="estado-vazio-icone">
+                    +
+                </div>
+
+                <h2>Nenhum treino encontrado</h2>
+
+                <p>
+                    Você ainda não possui nenhum treino personalizado.
+                    Preencha sua ficha para gerar seu primeiro plano.
+                </p>
+
+                <a
+                    href="{% url 'treino:criar_perfil' %}"
+                    class="btn-principal"
+                >
+                    Criar meu primeiro treino
+                </a>
+
+            </section>
+
+        {% endif %}
+
+    </div>
+
+</main>
+
+{% endblock %}

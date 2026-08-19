@@ -1,105 +1,291 @@
+```html
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}
     <title>Registrar progresso | PlanoFit</title>
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/static.css' %}">
+    <link rel="stylesheet" href="{% static 'css/monitoramento_form.css' %}">
 {% endblock %}
 
 
 {% block nav %}
-    <nav>
-        <a href="{% url 'monitoramento:dashboard' %}" class="navbar-brand">PlanoFit</a>
+<nav>
 
-        <form method="POST" action="{% url 'logout' %}" class="form-logout">
-            {% csrf_token %}
-            <button type="submit" class="botao-logout">Sair</button>
-        </form>
+    <a
+        href="{% url 'monitoramento:dashboard' %}"
+        class="navbar-brand"
+    >
+        PlanoFit
+    </a>
 
-        <a href="{% url 'perfil' %}">Perfil</a>
-        <a href="{% url 'criar_ficha' %}">Treino</a>
-        <a href="{% url 'biblioteca' %}">Biblioteca</a>
-    </nav>
+    <form
+        method="POST"
+        action="{% url 'logout' %}"
+        class="form-logout"
+    >
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="botao-logout"
+        >
+            Sair
+        </button>
+    </form>
+
+    <a href="{% url 'perfil' %}">
+        Perfil
+    </a>
+
+    <a href="{% url 'treino:criar_perfil' %}">
+        Criar ficha
+    </a>
+
+    <a href="{% url 'treino:biblioteca' %}">
+        Biblioteca
+    </a>
+
+</nav>
 {% endblock %}
 
 
 {% block content %}
 
-<div class="container">
+<main class="pagina-monitoramento">
 
-    <div class="form-card">
+    <div class="monitoramento-container">
 
-    <h1>Registrar progresso</h1>
+        <div class="area-voltar">
 
-    <p>
-        Informe seus dados de hoje.
-    </p>
+            <a
+                href="{% url 'monitoramento:dashboard' %}"
+                class="btn-voltar"
+            >
+                ← Voltar
+            </a>
 
-    <form method="post">
-
-        {% csrf_token %}
-
-        <div>
-            <label for="{{ form.peso.id_for_label }}">
-                Peso (kg)
-            </label>
-
-            {{ form.peso }}
-
-            {{ form.peso.errors }}
         </div>
 
 
-        <div>
-            <label for="{{ form.agua.id_for_label }}">
-                Água consumida (L)
-            </label>
+        <section class="monitoramento-card">
 
-            {{ form.agua }}
+            <header class="monitoramento-header">
 
-            {{ form.agua.errors }}
-        </div>
+                <span class="pagina-tag">
+                    Acompanhamento diário
+                </span>
 
+                <h1>Registrar progresso</h1>
 
-        <div>
-            <label for="{{ form.tempo_cardio.id_for_label }}">
-                Tempo de cardio (min)
-            </label>
+                <p>
+                    Registre seus dados de hoje para acompanhar
+                    sua evolução ao longo do tempo.
+                </p>
 
-            {{ form.tempo_cardio }}
-
-            {{ form.tempo_cardio.errors }}
-        </div>
+            </header>
 
 
-        <div>
-            {{ form.seguiu_dieta }}
+            <form
+                method="POST"
+                class="monitoramento-form"
+            >
 
-            <label for="{{ form.seguiu_dieta.id_for_label }}">
-                Segui minha dieta hoje
-            </label>
-        </div>
-
-
-        <div>
-            {{ form.realizou_treino }}
-
-            <label for="{{ form.realizou_treino.id_for_label }}">
-                Realizei meu treino hoje
-            </label>
-        </div>
+                {% csrf_token %}
 
 
-        <button type="submit">
-            Salvar
-        </button>
+                {% if form.errors %}
 
-    </form>
+                    <div class="form-errors">
+
+                        <strong>
+                            Verifique os dados informados.
+                        </strong>
+
+                        {% for field in form %}
+
+                            {% for error in field.errors %}
+
+                                <p>
+                                    {{ field.label }}:
+                                    {{ error }}
+                                </p>
+
+                            {% endfor %}
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="dados-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.peso.id_for_label }}">
+                            Peso
+                        </label>
+
+                        <div class="input-unidade">
+
+                            {{ form.peso }}
+
+                            <span>kg</span>
+
+                        </div>
+
+                        {% for error in form.peso.errors %}
+                            <small class="erro-campo">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.agua.id_for_label }}">
+                            Água consumida
+                        </label>
+
+                        <div class="input-unidade">
+
+                            {{ form.agua }}
+
+                            <span>L</span>
+
+                        </div>
+
+                        {% for error in form.agua.errors %}
+                            <small class="erro-campo">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.tempo_cardio.id_for_label }}">
+                            Tempo de cardio
+                        </label>
+
+                        <div class="input-unidade">
+
+                            {{ form.tempo_cardio }}
+
+                            <span>min</span>
+
+                        </div>
+
+                        {% for error in form.tempo_cardio.errors %}
+                            <small class="erro-campo">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+                <section class="habitos-section">
+
+                    <div class="section-header">
+
+                        <h2>Hábitos de hoje</h2>
+
+                        <p>
+                            Marque as atividades que você realizou.
+                        </p>
+
+                    </div>
+
+
+                    <div class="habitos-grid">
+
+
+                        <label
+                            class="habito-card"
+                            for="{{ form.seguiu_dieta.id_for_label }}"
+                        >
+
+                            <div class="checkbox-area">
+                                {{ form.seguiu_dieta }}
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Dieta
+                                </strong>
+
+                                <span>
+                                    Segui minha dieta hoje
+                                </span>
+                            </div>
+
+                        </label>
+
+
+                        <label
+                            class="habito-card"
+                            for="{{ form.realizou_treino.id_for_label }}"
+                        >
+
+                            <div class="checkbox-area">
+                                {{ form.realizou_treino }}
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Treino
+                                </strong>
+
+                                <span>
+                                    Realizei meu treino hoje
+                                </span>
+                            </div>
+
+                        </label>
+
+
+                    </div>
+
+                </section>
+
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'monitoramento:dashboard' %}"
+                        class="btn-cancelar"
+                    >
+                        Cancelar
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn-salvar"
+                    >
+                        Salvar progresso
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
 
     </div>
 
-</div>
+</main>
 
 {% endblock %}
+```

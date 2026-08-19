@@ -14,8 +14,10 @@
         </form>
 
         <a href="{% url 'perfil' %}">Perfil</a>
-        <a href="{% url 'criar_ficha' %}">Treino</a>
-        <a href="{% url 'biblioteca' %}">Biblioteca</a>
+        <a href="{% url 'treino:criar_perfil' %}">
+            Criar ficha
+        </a>
+        <a href="{% url 'treino:biblioteca' %}">Biblioteca</a>
     </nav>
 {% endblock %}
 

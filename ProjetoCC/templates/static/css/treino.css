@@ -1,0 +1,745 @@
+/* ==============================
+   PÁGINA
+============================== */
+
+.pagina-treinos {
+    min-height: calc(100vh - 70px);
+
+    padding: 50px 20px 80px;
+
+    background-color: #050415;
+}
+
+.treinos-container {
+    width: 100%;
+    max-width: 1150px;
+
+    margin: 0 auto;
+}
+
+
+/* ==============================
+   CABEÇALHO
+============================== */
+
+.pagina-header {
+    margin-bottom: 35px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 30px;
+}
+
+.pagina-header h1 {
+    margin: 5px 0 8px;
+
+    color: #ffffff;
+
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+.pagina-header p {
+    margin: 0;
+
+    max-width: 600px;
+
+    color: #9f9cab;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.pagina-tag {
+    color: #a947cd;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.voltar-link {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #a7a4b4;
+
+    font-size: 14px;
+
+    text-decoration: none;
+}
+
+.voltar-link:hover {
+    color: #ffffff;
+}
+
+
+/* ==============================
+   BOTÕES
+============================== */
+
+.btn-principal,
+.btn-secundario,
+.btn-ver-treino {
+    display: inline-flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.btn-principal,
+.btn-ver-treino {
+    background-color: #a947cd;
+
+    color: #ffffff;
+}
+
+.btn-principal:hover,
+.btn-ver-treino:hover {
+    background-color: #bb59dd;
+
+    transform: translateY(-1px);
+}
+
+.btn-secundario {
+    border: 1px solid #39364d;
+
+    color: #d8d6df;
+
+    background-color: #151321;
+}
+
+.btn-secundario:hover {
+    border-color: #a947cd;
+
+    color: #ffffff;
+}
+
+
+/* ==============================
+   LISTA DE TREINOS
+============================== */
+
+.treinos-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.treino-card {
+    padding: 25px;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+
+    background-color: #11101f;
+
+    transition: 0.2s ease;
+}
+
+.treino-card:hover {
+    border-color: #443c59;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.treino-card-topo {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+}
+
+.treino-icone {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    background-color: rgba(169, 71, 205, 0.12);
+
+    color: #b958dd;
+
+    font-weight: 700;
+}
+
+.treino-info h2 {
+    margin: 4px 0 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+.treino-label {
+    color: #8e8a9c;
+
+    font-size: 12px;
+}
+
+
+/* ==============================
+   DETALHES DO CARD
+============================== */
+
+.treino-detalhes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+
+    margin: 25px 0;
+    padding: 18px 0;
+
+    border-top: 1px solid #29273b;
+    border-bottom: 1px solid #29273b;
+}
+
+.detalhe {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.detalhe span {
+    color: #817e8d;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+}
+
+.detalhe strong {
+    color: #dddbe4;
+
+    font-size: 13px;
+}
+
+.treino-card-acoes {
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+/* ==============================
+   RESUMO DO TREINO
+============================== */
+
+.resumo-treino {
+    margin-bottom: 30px;
+
+    padding: 22px 25px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    background-color: #11101f;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+}
+
+.resumo-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.resumo-item span {
+    color: #858291;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.resumo-item strong {
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+/* ==============================
+   DIAS
+============================== */
+
+.dias-treino {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+}
+
+.dia-card {
+    overflow: hidden;
+
+    background-color: #11101f;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+}
+
+.dia-header {
+    padding: 22px 25px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #29273b;
+}
+
+.dia-numero {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    background-color: #a947cd;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.dia-header span {
+    color: #858291;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+}
+
+.dia-header h2 {
+    margin: 3px 0 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+
+/* ==============================
+   EXERCÍCIOS
+============================== */
+
+.exercicios-lista {
+    padding: 10px 25px;
+}
+
+.exercicio-card {
+    padding: 18px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    border-bottom: 1px solid #262435;
+}
+
+.exercicio-card:last-child {
+    border-bottom: none;
+}
+
+.exercicio-principal {
+    min-width: 260px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.exercicio-numero {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background-color: #211e30;
+
+    color: #a947cd;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.exercicio-principal h3 {
+    margin: 0 0 3px;
+
+    color: #eae8ef;
+
+    font-size: 15px;
+}
+
+.exercicio-principal span {
+    color: #757180;
+
+    font-size: 11px;
+}
+
+.exercicio-dados {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(90px, 1fr));
+
+    gap: 15px;
+}
+
+.exercicio-dado {
+    min-width: 90px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.exercicio-dado span {
+    color: #757281;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+}
+
+.exercicio-dado strong {
+    color: #e5e3e9;
+
+    font-size: 13px;
+}
+
+
+/* ==============================
+   OBSERVAÇÕES
+============================== */
+
+.observacoes-card {
+    margin-top: 30px;
+
+    padding: 25px;
+
+    border: 1px solid rgba(169, 71, 205, 0.25);
+    border-radius: 14px;
+
+    background-color: rgba(169, 71, 205, 0.06);
+}
+
+.observacoes-titulo {
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.observacoes-icone {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: rgba(169, 71, 205, 0.18);
+
+    color: #c45be9;
+
+    font-weight: 700;
+}
+
+.observacoes-titulo span {
+    color: #a947cd;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+}
+
+.observacoes-titulo h2 {
+    margin: 2px 0 0;
+
+    color: #ffffff;
+
+    font-size: 18px;
+}
+
+.observacoes-card > p {
+    margin: 0;
+
+    color: #b5b2be;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   ESTADO VAZIO
+============================== */
+
+.estado-vazio {
+    padding: 70px 30px;
+
+    text-align: center;
+
+    background-color: #11101f;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+}
+
+.estado-vazio-icone {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background-color: rgba(169, 71, 205, 0.12);
+
+    color: #a947cd;
+
+    font-size: 30px;
+}
+
+.estado-vazio h2 {
+    margin: 0 0 10px;
+
+    color: #ffffff;
+}
+
+.estado-vazio p {
+    max-width: 500px;
+
+    margin: 0 auto 25px;
+
+    color: #918e9d;
+
+    line-height: 1.6;
+}
+
+.texto-bruto {
+    margin-top: 30px;
+
+    padding: 20px;
+
+    text-align: left;
+
+    border-radius: 10px;
+
+    background-color: #0a0912;
+
+    color: #c8c5ce;
+}
+
+
+/* ==============================
+   RESPONSIVIDADE
+============================== */
+
+@media (max-width: 850px) {
+
+    .treinos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resumo-treino {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .exercicio-card {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .exercicio-dados {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .pagina-treinos {
+        padding: 30px 15px 60px;
+    }
+
+    .pagina-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .pagina-header h1 {
+        font-size: 29px;
+    }
+
+    .btn-principal,
+    .btn-secundario {
+        width: 100%;
+    }
+
+    .resumo-treino {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .treino-detalhes {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .dia-header {
+        padding: 18px;
+    }
+
+    .exercicios-lista {
+        padding: 5px 18px;
+    }
+
+    .exercicio-dados {
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 8px;
+    }
+
+    .exercicio-dado {
+        min-width: 0;
+    }
+
+}
+
+.treino-data {
+    display: block;
+    margin-top: 5px;
+
+    color: #6f6c7c;
+    font-size: 12px;
+}
+
+
+.sem-exercicios {
+    margin: 0;
+    padding: 25px;
+
+    color: #8f8c99;
+    font-size: 14px;
+}
+
+
+.texto-bruto {
+    margin-top: 25px;
+    padding: 25px;
+
+    background-color: #090811;
+
+    border: 1px solid #29273b;
+    border-radius: 10px;
+
+    color: #c8c5d0;
+
+    text-align: left;
+    line-height: 1.7;
+}
+
+/* ==============================
+   BOTÃO VOLTAR
+============================== */
+
+.area-voltar {
+    margin-bottom: 25px;
+}
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 18px;
+
+    background-color: #151321;
+
+    border: 1px solid #39364d;
+    border-radius: 8px;
+
+    color: #c8c5d0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.btn-voltar:hover {
+    border-color: #a947cd;
+
+    background-color: #211e30;
+
+    color: #ffffff;
+
+    transform: translateX(-2px);
+}

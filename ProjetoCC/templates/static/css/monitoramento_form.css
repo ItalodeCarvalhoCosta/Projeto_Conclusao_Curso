@@ -1,0 +1,457 @@
+
+/* =====================================
+   PÁGINA
+===================================== */
+
+.pagina-monitoramento {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+
+    padding: 45px 20px 70px;
+
+    background-color: #050415;
+}
+
+.monitoramento-container {
+    width: 100%;
+    max-width: 950px;
+
+    margin: 0 auto;
+}
+
+
+/* =====================================
+   BOTÃO VOLTAR
+===================================== */
+
+.area-voltar {
+    margin-bottom: 20px;
+}
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 9px 16px;
+
+    border: 1px solid #39364d;
+    border-radius: 8px;
+
+    background-color: #151321;
+
+    color: #c8c5d0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.btn-voltar:hover {
+    border-color: #a947cd;
+
+    background-color: #211e30;
+
+    color: #ffffff;
+
+    transform: translateX(-2px);
+}
+
+
+/* =====================================
+   CARD PRINCIPAL
+===================================== */
+
+.monitoramento-card {
+    padding: 38px;
+
+    border: 1px solid #29273b;
+    border-radius: 16px;
+
+    background-color: #11101f;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =====================================
+   CABEÇALHO
+===================================== */
+
+.monitoramento-header {
+    margin-bottom: 35px;
+}
+
+.pagina-tag {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #a947cd;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.monitoramento-header h1 {
+    margin: 0 0 8px;
+
+    color: #ffffff;
+
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.monitoramento-header p {
+    max-width: 600px;
+
+    margin: 0;
+
+    color: #9996a6;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================
+   CAMPOS PRINCIPAIS
+===================================== */
+
+.dados-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-group > label {
+    color: #dedce5;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =====================================
+   INPUT COM UNIDADE
+===================================== */
+
+.input-unidade {
+    position: relative;
+}
+
+.input-unidade input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 52px 0 14px;
+
+    border: 1px solid #39364d;
+    border-radius: 8px;
+
+    background-color: #1b1929;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.input-unidade input:focus {
+    border-color: #a947cd;
+
+    background-color: #211e30;
+
+    box-shadow:
+        0 0 0 3px rgba(169, 71, 205, 0.12);
+}
+
+.input-unidade span {
+    position: absolute;
+
+    top: 50%;
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    color: #777483;
+
+    font-size: 12px;
+
+    pointer-events: none;
+}
+
+
+/* =====================================
+   HÁBITOS
+===================================== */
+
+.habitos-section {
+    margin-top: 35px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #29273b;
+}
+
+.section-header {
+    margin-bottom: 18px;
+}
+
+.section-header h2 {
+    margin: 0 0 5px;
+
+    color: #ffffff;
+
+    font-size: 18px;
+}
+
+.section-header p {
+    margin: 0;
+
+    color: #858291;
+
+    font-size: 13px;
+}
+
+.habitos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+/* =====================================
+   CARD DO CHECKBOX
+===================================== */
+
+.habito-card {
+    min-height: 80px;
+
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    border: 1px solid #302d42;
+    border-radius: 10px;
+
+    background-color: #171523;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.habito-card:hover {
+    border-color: #504765;
+
+    background-color: #1c1929;
+}
+
+.checkbox-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-area input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+
+    accent-color: #a947cd;
+
+    cursor: pointer;
+}
+
+.habito-card strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #e7e5ec;
+
+    font-size: 14px;
+}
+
+.habito-card span {
+    color: #817e8c;
+
+    font-size: 12px;
+}
+
+
+/* =====================================
+   ERROS
+===================================== */
+
+.form-errors {
+    margin-bottom: 25px;
+    padding: 15px 18px;
+
+    border: 1px solid rgba(220, 70, 80, 0.35);
+    border-radius: 8px;
+
+    background-color: rgba(220, 70, 80, 0.08);
+
+    color: #ff9299;
+
+    font-size: 13px;
+}
+
+.form-errors strong {
+    display: block;
+
+    margin-bottom: 8px;
+}
+
+.form-errors p {
+    margin: 4px 0;
+}
+
+.erro-campo {
+    color: #ff7d87;
+
+    font-size: 11px;
+}
+
+
+/* =====================================
+   AÇÕES
+===================================== */
+
+.form-actions {
+    margin-top: 35px;
+    padding-top: 25px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    border-top: 1px solid #29273b;
+}
+
+.btn-cancelar,
+.btn-salvar {
+    min-width: 135px;
+
+    padding: 12px 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* CANCELAR */
+
+.btn-cancelar {
+    border: 1px solid #39364d;
+
+    background-color: transparent;
+
+    color: #bbb8c4;
+}
+
+.btn-cancelar:hover {
+    background-color: #211e30;
+
+    color: #ffffff;
+}
+
+
+/* SALVAR */
+
+.btn-salvar {
+    border: none;
+
+    background-color: #a947cd;
+
+    color: #ffffff;
+}
+
+.btn-salvar:hover {
+    background-color: #b957dc;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================
+   RESPONSIVIDADE
+===================================== */
+
+@media (max-width: 800px) {
+
+    .dados-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .pagina-monitoramento {
+        padding: 25px 15px 50px;
+    }
+
+    .monitoramento-card {
+        padding: 25px 20px;
+    }
+
+    .monitoramento-header h1 {
+        font-size: 25px;
+    }
+
+    .habitos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Treino #{{ treino.id }} | PlanoFit</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/treino.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="pagina-treinos">
+
+    <div class="treinos-container">
+
+        <!-- CABEÇALHO -->
+
+        <header class="pagina-header">
+
+            <div>
+
+                               <div class="area-voltar">
+    <a
+        href="{% url 'treino:meus_treinos' %}"
+        class="btn-voltar"
+    >
+        ← Voltar
+    </a>
+</div>
+
+                <span class="pagina-tag">
+                    Treino personalizado
+                </span>
+
+                <h1>
+                    Treino #{{ treino.id }}
+                </h1>
+
+                <p>
+                    Gerado em
+                    {{ treino.criado_em|date:"d/m/Y" }}
+                    às
+                    {{ treino.criado_em|date:"H:i" }}
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'treino:criar_perfil' %}"
+                class="btn-secundario"
+            >
+                Gerar novo treino
+            </a>
+
+        </header>
+
+
+        <!-- RESUMO -->
+
+        <section class="resumo-treino">
+
+            <div class="resumo-item">
+                <span>Objetivo</span>
+
+                <strong>
+                    {{ treino.perfil.get_objetivo_display }}
+                </strong>
+            </div>
+
+
+            <div class="resumo-item">
+                <span>Nível</span>
+
+                <strong>
+                    {{ treino.perfil.get_nivel_experiencia_display }}
+                </strong>
+            </div>
+
+
+            <div class="resumo-item">
+                <span>Frequência</span>
+
+                <strong>
+                    {{ treino.perfil.frequencia_semanal }}
+                    dias/semana
+                </strong>
+            </div>
+
+
+            <div class="resumo-item">
+                <span>Duração</span>
+
+                <strong>
+                    {{ treino.perfil.tempo_por_sessao }}
+                    minutos
+                </strong>
+            </div>
+
+        </section>
+
+
+        <!-- TREINO GERADO -->
+
+        {% if dados_treino and dados_treino.dias %}
+
+            <div class="dias-treino">
+
+                {% for dia in dados_treino.dias %}
+
+                    <section class="dia-card">
+
+                        <header class="dia-header">
+
+                            <div class="dia-numero">
+                                {{ forloop.counter }}
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Sessão {{ forloop.counter }}
+                                </span>
+
+                                <h2>
+                                    {{ dia.dia }}
+                                </h2>
+
+                            </div>
+
+                        </header>
+
+
+                        {% if dia.exercicios %}
+
+                            <div class="exercicios-lista">
+
+                                {% for exercicio in dia.exercicios %}
+
+                                    <article class="exercicio-card">
+
+                                        <div class="exercicio-principal">
+
+                                            <div class="exercicio-numero">
+                                                {{ forloop.counter }}
+                                            </div>
+
+                                            <div>
+
+                                                <h3>
+                                                    {{ exercicio.nome }}
+                                                </h3>
+
+                                                <span>
+                                                    Exercício
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="exercicio-dados">
+
+                                            <div class="exercicio-dado">
+                                                <span>Séries</span>
+
+                                                <strong>
+                                                    {{ exercicio.series }}
+                                                </strong>
+                                            </div>
+
+
+                                            <div class="exercicio-dado">
+                                                <span>Repetições</span>
+
+                                                <strong>
+                                                    {{ exercicio.repeticoes }}
+                                                </strong>
+                                            </div>
+
+
+                                            <div class="exercicio-dado">
+                                                <span>Descanso</span>
+
+                                                <strong>
+                                                    {{ exercicio.descanso }}
+                                                </strong>
+                                            </div>
+
+                                        </div>
+
+                                    </article>
+
+                                {% endfor %}
+
+                            </div>
+
+                        {% else %}
+
+                            <p class="sem-exercicios">
+                                Nenhum exercício foi encontrado para esta sessão.
+                            </p>
+
+                        {% endif %}
+
+                    </section>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- OBSERVAÇÕES DA IA -->
+
+            {% if dados_treino.observacoes %}
+
+                <section class="observacoes-card">
+
+                    <div class="observacoes-titulo">
+
+                        <div class="observacoes-icone">
+                            !
+                        </div>
+
+                        <div>
+                            <span>Importante</span>
+                            <h2>Orientações gerais</h2>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        {{ dados_treino.observacoes }}
+                    </p>
+
+                </section>
+
+            {% endif %}
+
+
+        {% else %}
+
+            <!-- FALLBACK CASO O JSON NÃO TENHA SIDO GERADO -->
+
+            <section class="estado-vazio">
+
+                <h2>
+                    Treino não disponível em formato estruturado
+                </h2>
+
+                <p>
+                    A resposta original gerada para este treino está
+                    disponível abaixo.
+                </p>
+
+                {% if treino.conteudo_texto %}
+
+                    <div class="texto-bruto">
+                        {{ treino.conteudo_texto|linebreaks }}
+                    </div>
+
+                {% else %}
+
+                    <p>
+                        Não existem dados disponíveis para este treino.
+                    </p>
+
+                {% endif %}
+
+            </section>
+
+        {% endif %}
+
+    </div>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,340 @@
+/* =========================
+   PÁGINA
+========================= */
+
+.pagina-ficha {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+
+    padding: 50px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-color: #050415;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.ficha-card {
+    width: 100%;
+    max-width: 950px;
+
+    padding: 40px;
+
+    background-color: #11101f;
+
+    border: 1px solid #29273b;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.ficha-header {
+    margin-bottom: 35px;
+}
+
+.ficha-header h1 {
+    margin: 0 0 8px;
+
+    font-size: 32px;
+    color: #a947cd;
+}
+
+.ficha-header p {
+    margin: 0;
+
+    color: #aaa8b8;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.ficha-form {
+    width: 100%;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 24px;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-group label {
+    color: #e7e5ee;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* INPUT, SELECT E TEXTAREA */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #39364d;
+    border-radius: 8px;
+
+    background-color: #1b1929;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+/* ALTURA DOS CAMPOS */
+
+.form-group input,
+.form-group select {
+    height: 46px;
+}
+
+.form-group textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+
+/* FOCO */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #a947cd;
+
+    background-color: #211e31;
+
+    box-shadow: 0 0 0 3px rgba(169, 71, 205, 0.15);
+}
+
+
+/* PLACEHOLDER */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #777487;
+}
+
+
+/* SELECT */
+
+.form-group select {
+    cursor: pointer;
+}
+
+
+/* =========================
+   CAMPO MAIOR
+========================= */
+
+.campo-grande {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================
+   TEXTO DE AJUDA
+========================= */
+
+.help-text {
+    color: #858294;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* =========================
+   ERROS
+========================= */
+
+.field-errors {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    color: #ff7777;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.form-actions {
+    margin-top: 35px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #29273b;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.btn-salvar,
+.btn-cancelar {
+    min-width: 130px;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* BOTÃO CANCELAR */
+
+.btn-cancelar {
+    border: 1px solid #3c394c;
+
+    background-color: transparent;
+
+    color: #c6c3d0;
+}
+
+.btn-cancelar:hover {
+    background-color: #242233;
+
+    color: #ffffff;
+}
+
+
+/* BOTÃO PRINCIPAL */
+
+.btn-salvar {
+    border: none;
+
+    background-color: #a947cd;
+
+    color: white;
+}
+
+.btn-salvar:hover {
+    background-color: #bb59dd;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 700px) {
+
+    .pagina-ficha {
+        padding: 25px 15px;
+    }
+
+    .ficha-card {
+        padding: 25px 20px;
+    }
+
+    .ficha-header h1 {
+        font-size: 26px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-grande {
+        grid-column: auto;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-salvar,
+    .btn-cancelar {
+        width: 100%;
+    }
+}
+
+
+.form-errors {
+    margin-bottom: 25px;
+    padding: 15px 18px;
+
+    background-color: rgba(220, 53, 69, 0.1);
+
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    border-radius: 8px;
+
+    color: #ff8c98;
+
+    font-size: 14px;
+}
+
+.form-errors p {
+    margin: 5px 0;
+}
+
+.form-errors strong {
+    color: #ffb0b8;
+}
+
+.field-errors {
+    margin-top: 2px;
+
+    color: #ff7777;
+
+    font-size: 12px;
+}

@@ -1,85 +1,110 @@
-import json
-import requests
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import SolicitacaoTreinoForm, FichaTreinoForm
-from .models import Exercicio, FichaTreino, FichaExercicio
-from .ia import montar_prompt, chamar_ia
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+
+from .forms import PerfilTreinoForm
+from .models import PerfilTreino, TreinoPersonalizado, Exercicio
+from .ia import gerar_treino_ia
 
 
 @login_required
-def criar_treino(request):
+def criar_perfil_treino(request):
+    """
+    Formulário onde o usuário informa peso, altura, idade, objetivo,
+    lesões, etc. Ao salvar, manda direto pra tela que gera o treino.
+    """
     if request.method == 'POST':
-        form = SolicitacaoTreinoForm(request.POST)
+        form = PerfilTreinoForm(request.POST)
         if form.is_valid():
-            solicitacao = form.save(commit=False)
-            solicitacao.usuario = request.user
-            solicitacao.save()
-
-            try:
-                plano = chamar_ia(montar_prompt(solicitacao))
-            except (requests.RequestException, json.JSONDecodeError, KeyError):
-                return render(request, 'treino/erro_geracao.html', {'solicitacao': solicitacao})
-
-            ficha = FichaTreino.objects.create(
-                usuario=request.user,
-                nome=plano.get('nome', 'Treino gerado por IA'),
-                objetivo=plano.get('objetivo', solicitacao.objetivo_principal),
-                nivel=plano.get('nivel', solicitacao.nivel_experiencia),
-            )
-
-            for i, ex in enumerate(plano.get('exercicios', []), start=1):
-                exercicio_obj, _ = Exercicio.objects.get_or_create(nome=ex['nome'])
-                FichaExercicio.objects.create(
-                    ficha=ficha, exercicio=exercicio_obj, ordem=i,
-                    series=ex.get('series', 3), repeticoes=ex.get('repeticoes', 12),
-                )
-
-            solicitacao.ficha_gerada = ficha
-            solicitacao.save()
-            return redirect('ficha_detail', pk=ficha.pk)
+            perfil = form.save(commit=False)
+            perfil.usuario = request.user
+            perfil.save()
+            return redirect('treino:gerar_treino', perfil_id=perfil.id)
     else:
-        form = SolicitacaoTreinoForm()
+        form = PerfilTreinoForm()
 
-    return render(request, 'treino/criar_treino.html', {'form': form})
-
-
-@login_required
-def ficha_detail(request, pk):
-    ficha = get_object_or_404(FichaTreino, pk=pk, usuario=request.user)
-    itens = ficha.fichaexercicio_set.select_related('exercicio').order_by('ordem')
-    return render(request, 'treino/ficha_detail.html', {'ficha': ficha, 'itens': itens})
+    return render(request, 'treino/criar_perfil.html', {'form': form})
 
 
 @login_required
-def minhas_fichas(request):
-    fichas = FichaTreino.objects.filter(usuario=request.user).order_by('-criado_em')
-    return render(request, 'treino/minhas_fichas.html', {'fichas': fichas})
+def gerar_treino(request, perfil_id):
+    """
+    Pega o PerfilTreino já salvo, manda pra IA (ia.py) e salva o
+    resultado em TreinoPersonalizado.
+    """
+    perfil = get_object_or_404(PerfilTreino, id=perfil_id, usuario=request.user)
+
+    try:
+        texto, dados_json = gerar_treino_ia(perfil)
+    except Exception:
+        messages.error(
+            request,
+            'Não foi possível gerar o treino agora. Tente novamente em instantes.'
+        )
+        return redirect('treino:criar_perfil')
+
+    treino = TreinoPersonalizado.objects.create(
+        perfil=perfil,
+        conteudo_texto=texto,
+        conteudo_json=dados_json,
+    )
+    return redirect('treino:ver_treino', treino_id=treino.id)
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
+
+from .models import TreinoPersonalizado
 
 
 @login_required
-def criar_ficha(request):
-    if request.method == 'POST':
-        form = FichaTreinoForm(request.POST)
-        if form.is_valid():
-            ficha = form.save(commit=False)
-            ficha.usuario = request.user
-            ficha.save()
-            exercicios = form.cleaned_data.get('exercicios')
-            for ordem, ex in enumerate(exercicios, start=1):
-                FichaExercicio.objects.create(ficha=ficha, exercicio=ex, ordem=ordem)
-            return redirect('ficha_detail', pk=ficha.pk)
-    else:
-        form = FichaTreinoForm()
+def meus_treinos(request):
 
-    return render(request, 'treino/criar_ficha.html', {'form': form})
+    treinos = TreinoPersonalizado.objects.filter(
+        perfil__usuario=request.user
+    ).select_related('perfil')
+
+    return render(
+        request,
+        'treino/meus_treinos.html',
+        {
+            'treinos': treinos
+        }
+    )
 
 
-def biblioteca(request):
+@login_required
+def ver_treino(request, treino_id):
+
+    treino = get_object_or_404(
+        TreinoPersonalizado.objects.select_related('perfil'),
+        id=treino_id,
+        perfil__usuario=request.user
+    )
+
+    return render(
+        request,
+        'treino/ver_treino.html',
+        {
+            'treino': treino,
+            'dados_treino': treino.conteudo_json
+        }
+    )
+
+
+@login_required
+def biblioteca_exercicios(request):
+    """
+    Biblioteca de exercícios: busca por nome (?q=crucifixo).
+    Somente leitura pro usuário comum — cadastro/edição/exclusão só
+    pelo Django Admin (ver admin.py).
+    """
+    termo = request.GET.get('q', '').strip()
     exercicios = Exercicio.objects.all()
-    return render(request, 'treino/biblioteca.html', {'exercicios': exercicios})
+    if termo:
+        exercicios = exercicios.filter(nome__icontains=termo)
 
-
-def exercicio_detail(request, pk):
-    exercicio = get_object_or_404(Exercicio, pk=pk)
-    return render(request, 'treino/exercicio_detail.html', {'exercicio': exercicio})
+    return render(request, 'treino/biblioteca.html', {
+        'exercicios': exercicios,
+        'termo': termo,
+    })
