@@ -3,7 +3,7 @@
 ============================== */
 
 .pagina-treinos {
-    min-height: calc(100vh - 70px);
+    min-height: 100vh;
 
     padding: 50px 20px 80px;
 

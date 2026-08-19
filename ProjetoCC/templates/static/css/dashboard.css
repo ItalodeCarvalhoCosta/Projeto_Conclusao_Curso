@@ -646,22 +646,77 @@ form div:has(> input[type="checkbox"]) input {
 ========================= */
 
 .sugestao-nutricional {
-    background: #f0fdf6;
-    border: 1px solid #b7e4c7;
-    border-radius: 10px;
-    padding: 20px;
+    background: #11101f;
+    border: 1px solid #29273b;
+    border-radius: 12px;
+
+    padding: 22px;
     margin-bottom: 24px;
+
+    color: #e7e5ec;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.22);
 }
+
+
+/* Primeiro parágrafo */
 
 .sugestao-nutricional > p:first-child {
     margin-top: 0;
 }
 
+
+/* Linhas */
+
 .sugestao-nutricional .row {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
+
+/* Cards internos */
+
 .sugestao-nutricional .col-md {
+    padding: 16px;
+
+    background: #171523;
+
+    border: 1px solid #302d42;
+    border-radius: 10px;
+
     box-shadow: none;
-    border: 1px solid #d7ecdf;
+
+    color: #dedce5;
+}
+
+
+/* Títulos */
+
+.sugestao-nutricional h2,
+.sugestao-nutricional h3 {
+    color: #ffffff;
+}
+
+
+/* Destaques */
+
+.sugestao-nutricional strong {
+    color: #a947cd;
+}
+
+
+/* Textos secundários */
+
+.sugestao-nutricional p {
+    color: #aaa7b5;
+}
+
+
+/* Hover dos cards internos */
+
+.sugestao-nutricional .col-md:hover {
+    border-color: #a947cd;
+
+    background: #1c1929;
+
+    transition: 0.2s ease;
 }
