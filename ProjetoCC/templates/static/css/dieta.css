@@ -1,0 +1,1314 @@
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    background-color: #050415;
+}
+
+
+/* =========================================
+   PÁGINAS DE DIETA
+========================================= */
+
+.pagina-dieta,
+.pagina-dietas {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 45px 20px 70px;
+
+    background-color: #050415;
+
+    color: #ffffff;
+}
+
+.dieta-container,
+.dietas-container {
+    width: 100%;
+    max-width: 1150px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
+
+.area-voltar {
+    margin-bottom: 22px;
+}
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 10px 17px;
+
+    border: 1px solid #39364d;
+    border-radius: 8px;
+
+    background-color: #151321;
+
+    color: #c8c5d0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.btn-voltar:hover {
+    border-color: #a947cd;
+
+    background-color: #211e30;
+
+    color: #ffffff;
+
+    transform: translateX(-2px);
+}
+
+
+/* =========================================
+   CABEÇALHO DAS PÁGINAS
+========================================= */
+
+.pagina-header {
+    margin-bottom: 32px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 25px;
+}
+
+.pagina-header h1 {
+    margin: 5px 0 8px;
+
+    color: #ffffff;
+
+    font-size: 34px;
+    line-height: 1.2;
+}
+
+.pagina-header p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #9c99a8;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.pagina-tag {
+    display: block;
+
+    color: #a947cd;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.btn-principal,
+.btn-secundario,
+.btn-ver-dieta,
+.btn-cancelar {
+    min-height: 42px;
+
+    padding: 11px 19px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* BOTÃO PRINCIPAL */
+
+.btn-principal,
+.btn-ver-dieta {
+    border: none;
+
+    background-color: #a947cd;
+
+    color: #ffffff;
+}
+
+.btn-principal:hover,
+.btn-ver-dieta:hover {
+    background-color: #b957dc;
+
+    transform: translateY(-1px);
+}
+
+
+/* BOTÃO SECUNDÁRIO */
+
+.btn-secundario,
+.btn-cancelar {
+    border: 1px solid #39364d;
+
+    background-color: #151321;
+
+    color: #c8c5d0;
+}
+
+.btn-secundario:hover,
+.btn-cancelar:hover {
+    border-color: #a947cd;
+
+    background-color: #211e30;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   FORMULÁRIO DE CRIAÇÃO DA DIETA
+========================================= */
+
+.form-dieta-card {
+    padding: 38px;
+
+    border: 1px solid #29273b;
+    border-radius: 16px;
+
+    background-color: #11101f;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.form-dieta-header {
+    margin-bottom: 35px;
+}
+
+.form-dieta-header h1 {
+    margin: 5px 0 8px;
+
+    color: #ffffff;
+
+    font-size: 30px;
+}
+
+.form-dieta-header p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #9996a6;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.dieta-form {
+    width: 100%;
+}
+
+
+/* =========================================
+   SEÇÕES DO FORMULÁRIO
+========================================= */
+
+.form-section {
+    margin-top: 30px;
+    padding-top: 30px;
+
+    border-top: 1px solid #29273b;
+}
+
+.form-section:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+
+    border-top: none;
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    margin: 4px 0 6px;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+.section-header p {
+    margin: 0;
+
+    color: #888594;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   GRID DO FORMULÁRIO
+========================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: #dedce5;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #39364d;
+    border-radius: 8px;
+
+    background-color: #1b1929;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input,
+.form-group select {
+    height: 46px;
+
+    padding: 0 14px;
+}
+
+.form-group textarea {
+    min-height: 105px;
+
+    padding: 13px 14px;
+
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #a947cd;
+
+    background-color: #211e30;
+
+    box-shadow: 0 0 0 3px rgba(169, 71, 205, 0.12);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #706d7b;
+}
+
+
+/* =========================================
+   INPUT COM UNIDADE
+========================================= */
+
+.input-unidade {
+    position: relative;
+}
+
+.input-unidade input {
+    padding-right: 50px;
+}
+
+.input-unidade > span:not(.prefixo) {
+    position: absolute;
+
+    top: 50%;
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    color: #777483;
+
+    font-size: 12px;
+
+    pointer-events: none;
+}
+
+
+/* R$ */
+
+.input-dinheiro .prefixo {
+    position: absolute;
+
+    top: 50%;
+    left: 14px;
+
+    transform: translateY(-50%);
+
+    color: #8c8998;
+
+    font-size: 13px;
+
+    pointer-events: none;
+}
+
+.input-dinheiro input {
+    padding-left: 42px;
+    padding-right: 14px;
+}
+
+
+/* =========================================
+   CAMPOS GRANDES
+========================================= */
+
+.campo-grande {
+    width: 100%;
+}
+
+
+/* =========================================
+   AJUDA E ERROS
+========================================= */
+
+.help-text {
+    color: #777482;
+
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.erro-campo {
+    color: #ff7d87;
+
+    font-size: 11px;
+}
+
+.form-errors {
+    margin-bottom: 25px;
+    padding: 15px 18px;
+
+    border: 1px solid rgba(220, 70, 80, 0.35);
+    border-radius: 8px;
+
+    background-color: rgba(220, 70, 80, 0.08);
+
+    color: #ff9299;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   AÇÕES DO FORMULÁRIO
+========================================= */
+
+.form-actions {
+    margin-top: 35px;
+    padding-top: 25px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    border-top: 1px solid #29273b;
+}
+
+
+/* =========================================
+   MINHAS DIETAS
+========================================= */
+
+.dietas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.dieta-card {
+    padding: 25px;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+
+    background-color: #11101f;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.dieta-card:hover {
+    border-color: #443c59;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* TOPO */
+
+.dieta-card-topo {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+}
+
+.dieta-icone {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background-color: rgba(169, 71, 205, 0.12);
+
+    color: #b958dd;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.dieta-info h2 {
+    margin: 4px 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+.dieta-label {
+    color: #898695;
+
+    font-size: 11px;
+}
+
+.dieta-data {
+    color: #6f6c7c;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   DETALHES DA DIETA
+========================================= */
+
+.dieta-detalhes {
+    margin: 24px 0 18px;
+    padding: 18px 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+
+    border-top: 1px solid #29273b;
+    border-bottom: 1px solid #29273b;
+}
+
+.detalhe {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.detalhe span {
+    color: #777483;
+
+    font-size: 10px;
+
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.detalhe strong {
+    color: #dedce5;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   METAS NOS CARDS
+========================================= */
+
+.metas-dieta {
+    margin-bottom: 22px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 8px;
+}
+
+.meta-item {
+    padding: 12px 8px;
+
+    text-align: center;
+
+    border: 1px solid #2d2a3e;
+    border-radius: 8px;
+
+    background-color: #171523;
+}
+
+.meta-item > span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #797686;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.meta-item strong {
+    color: #ffffff;
+
+    font-size: 16px;
+}
+
+.meta-item small {
+    margin-left: 2px;
+
+    color: #858290;
+
+    font-size: 10px;
+}
+
+.dieta-card-acoes {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* =========================================
+   VER DIETA - RESUMO DO PERFIL
+========================================= */
+
+.resumo-dieta {
+    margin-bottom: 30px;
+    padding: 22px 25px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+
+    background-color: #11101f;
+}
+
+.resumo-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.resumo-item span {
+    color: #777483;
+
+    font-size: 10px;
+
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.resumo-item strong {
+    color: #ffffff;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   VER DIETA - METAS
+========================================= */
+
+.metas-section,
+.cardapio-section {
+    margin-top: 35px;
+}
+
+.metas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+.meta-card {
+    padding: 20px;
+
+    border: 1px solid #29273b;
+    border-radius: 12px;
+
+    background-color: #11101f;
+}
+
+.meta-card > span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #888594;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+}
+
+.meta-card strong {
+    color: #a947cd;
+
+    font-size: 25px;
+}
+
+.meta-card small {
+    margin-left: 4px;
+
+    color: #858290;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   REFEIÇÕES
+========================================= */
+
+.refeicoes-lista {
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+.refeicao-card {
+    overflow: hidden;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+
+    background-color: #11101f;
+}
+
+
+/* CABEÇALHO */
+
+.refeicao-header {
+    padding: 20px 24px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    border-bottom: 1px solid #29273b;
+}
+
+.refeicao-numero {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background-color: #a947cd;
+
+    color: #ffffff;
+
+    font-weight: 700;
+}
+
+.refeicao-titulo {
+    flex: 1;
+}
+
+.refeicao-titulo > span {
+    color: #777483;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+}
+
+.refeicao-titulo h2 {
+    margin: 3px 0 0;
+
+    color: #ffffff;
+
+    font-size: 18px;
+}
+
+.refeicao-horario,
+.refeicao-calorias {
+    min-width: 110px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.refeicao-horario span,
+.refeicao-calorias span {
+    color: #777483;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.refeicao-horario strong,
+.refeicao-calorias strong {
+    color: #dedce5;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   LISTA DE ALIMENTOS
+========================================= */
+
+.alimentos-lista {
+    padding: 10px 24px 15px;
+}
+
+.alimentos-header,
+.alimento-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+
+    gap: 20px;
+
+    align-items: center;
+}
+
+.alimentos-header {
+    padding: 12px 0;
+
+    color: #706d7b;
+
+    font-size: 9px;
+
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.alimento-item {
+    padding: 15px 0;
+
+    border-top: 1px solid #262435;
+}
+
+.alimento-nome {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.alimento-numero {
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #211e30;
+
+    color: #a947cd;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.alimento-nome strong {
+    color: #e4e2e8;
+
+    font-size: 13px;
+}
+
+.alimento-quantidade,
+.alimento-calorias {
+    color: #aaa7b4;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   RESUMO DO DIA
+========================================= */
+
+.resumo-gerado {
+    margin-top: 30px;
+    padding: 25px;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+
+    background-color: #11101f;
+}
+
+.resumo-gerado-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.resumo-gerado-grid > div {
+    padding: 15px;
+
+    border-radius: 9px;
+
+    background-color: #171523;
+}
+
+.resumo-gerado-grid span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #777483;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.resumo-gerado-grid strong {
+    color: #e7e5ec;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CUSTO
+========================================= */
+
+.custo-card {
+    margin-top: 25px;
+    padding: 22px 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+
+    background-color: #11101f;
+}
+
+.custo-card h2 {
+    margin: 4px 0 0;
+
+    color: #ffffff;
+
+    font-size: 18px;
+}
+
+.valor-custo {
+    color: #a947cd;
+
+    font-size: 18px;
+
+    text-align: right;
+}
+
+
+/* =========================================
+   OBSERVAÇÕES
+========================================= */
+
+.observacoes-card {
+    margin-top: 25px;
+    padding: 24px;
+
+    border: 1px solid rgba(169, 71, 205, 0.3);
+    border-radius: 14px;
+
+    background-color: rgba(169, 71, 205, 0.06);
+}
+
+.observacoes-titulo {
+    margin-bottom: 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.observacoes-icone {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: rgba(169, 71, 205, 0.18);
+
+    color: #c45be9;
+
+    font-weight: 700;
+}
+
+.observacoes-titulo span {
+    color: #a947cd;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.observacoes-titulo h2 {
+    margin: 2px 0 0;
+
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+.observacoes-card > p {
+    margin: 0;
+
+    color: #aaa7b5;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   AVISO
+========================================= */
+
+.aviso-dieta {
+    margin-top: 25px;
+    padding: 18px 20px;
+
+    border: 1px solid #3c384d;
+    border-radius: 10px;
+
+    background-color: #171523;
+}
+
+.aviso-dieta strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #a947cd;
+
+    font-size: 13px;
+}
+
+.aviso-dieta p {
+    margin: 0;
+
+    color: #9996a5;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   ESTADO VAZIO
+========================================= */
+
+.estado-vazio {
+    padding: 65px 30px;
+
+    text-align: center;
+
+    border: 1px solid #29273b;
+    border-radius: 14px;
+
+    background-color: #11101f;
+}
+
+.estado-vazio-icone {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: rgba(169, 71, 205, 0.12);
+
+    color: #a947cd;
+
+    font-size: 28px;
+}
+
+.estado-vazio h2 {
+    margin: 0 0 10px;
+
+    color: #ffffff;
+}
+
+.estado-vazio p {
+    max-width: 550px;
+
+    margin: 0 auto 22px;
+
+    color: #918e9d;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.texto-bruto {
+    margin-top: 25px;
+    padding: 20px;
+
+    text-align: left;
+
+    border: 1px solid #29273b;
+    border-radius: 10px;
+
+    background-color: #090811;
+
+    color: #c8c5ce;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   AÇÕES FINAIS
+========================================= */
+
+.acoes-finais {
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 12px;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .dietas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resumo-dieta,
+    .metas-grid,
+    .resumo-gerado-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .refeicao-header {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+    .refeicao-titulo {
+        min-width: calc(100% - 60px);
+    }
+
+    .refeicao-horario,
+    .refeicao-calorias {
+        margin-left: 58px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .pagina-dieta,
+    .pagina-dietas {
+        padding: 25px 15px 50px;
+    }
+
+    .form-dieta-card {
+        padding: 25px 20px;
+    }
+
+    .pagina-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .pagina-header h1 {
+        font-size: 28px;
+    }
+
+    .pagina-header .btn-principal,
+    .pagina-header .btn-secundario {
+        width: 100%;
+    }
+
+    .resumo-dieta,
+    .metas-grid,
+    .resumo-gerado-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .metas-dieta {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dieta-detalhes {
+        grid-template-columns: 1fr;
+    }
+
+    .alimentos-header {
+        display: none;
+    }
+
+    .alimento-item {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .alimento-quantidade,
+    .alimento-calorias {
+        margin-left: 40px;
+    }
+
+    .custo-card {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .valor-custo {
+        text-align: left;
+    }
+
+    .acoes-finais,
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .acoes-finais a,
+    .form-actions a,
+    .form-actions button {
+        width: 100%;
+    }
+
+}

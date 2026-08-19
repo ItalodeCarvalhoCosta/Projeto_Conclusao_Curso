@@ -1,0 +1,649 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>Criar dieta | PlanoFit</title>
+{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/dieta.css' %}">
+{% endblock %}
+
+
+{% block nav %}
+
+<nav>
+
+    <a
+        href="{% url 'monitoramento:dashboard' %}"
+        class="navbar-brand"
+    >
+        PlanoFit
+    </a>
+
+    <form
+        method="POST"
+        action="{% url 'logout' %}"
+        class="form-logout"
+    >
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="botao-logout"
+        >
+            Sair
+        </button>
+
+    </form>
+
+    <a href="{% url 'perfil' %}">
+        Perfil
+    </a>
+
+    <a href="{% url 'treino:meus_treinos' %}">
+        Meus treinos
+    </a>
+
+    <a href="{% url 'dieta:minhas_dietas' %}">
+        Minhas dietas
+    </a>
+
+    <a href="{% url 'treino:biblioteca' %}">
+        Biblioteca
+    </a>
+
+</nav>
+
+{% endblock %}
+
+
+{% block content %}
+
+<main class="pagina-dieta">
+
+    <div class="dieta-container">
+
+
+        <!-- VOLTAR -->
+
+        <div class="area-voltar">
+
+            <a
+                href="{% url 'dieta:minhas_dietas' %}"
+                class="btn-voltar"
+            >
+                ← Voltar
+            </a>
+
+        </div>
+
+
+        <section class="form-dieta-card">
+
+
+            <!-- CABEÇALHO -->
+
+            <header class="form-dieta-header">
+
+                <span class="pagina-tag">
+                    Plano alimentar
+                </span>
+
+                <h1>
+                    Criar dieta personalizada
+                </h1>
+
+                <p>
+                    Preencha seus dados para gerar uma sugestão
+                    alimentar adequada ao seu perfil e objetivo.
+                </p>
+
+            </header>
+
+
+            <form
+                method="POST"
+                action="{% url 'dieta:criar_perfil' %}"
+                class="dieta-form"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- ERROS GERAIS -->
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- =========================
+                     DADOS PESSOAIS
+                ========================== -->
+
+                <section class="form-section">
+
+                    <div class="section-header">
+
+                        <h2>
+                            Dados pessoais
+                        </h2>
+
+                        <p>
+                            Informações utilizadas para calcular
+                            suas necessidades nutricionais.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <!-- PESO -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.peso.id_for_label }}">
+                                Peso
+                            </label>
+
+                            <div class="input-unidade">
+
+                                {{ form.peso }}
+
+                                <span>kg</span>
+
+                            </div>
+
+                            {% if form.peso.help_text %}
+                                <small class="help-text">
+                                    {{ form.peso.help_text }}
+                                </small>
+                            {% endif %}
+
+                            {% for error in form.peso.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- ALTURA -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.altura.id_for_label }}">
+                                Altura
+                            </label>
+
+                            <div class="input-unidade">
+
+                                {{ form.altura }}
+
+                                <span>m</span>
+
+                            </div>
+
+                            {% if form.altura.help_text %}
+                                <small class="help-text">
+                                    {{ form.altura.help_text }}
+                                </small>
+                            {% endif %}
+
+                            {% for error in form.altura.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- IDADE -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.idade.id_for_label }}">
+                                Idade
+                            </label>
+
+                            {{ form.idade }}
+
+                            {% for error in form.idade.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- GÊNERO -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.genero.id_for_label }}">
+                                Gênero
+                            </label>
+
+                            {{ form.genero }}
+
+                            {% for error in form.genero.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================
+                     OBJETIVO
+                ========================== -->
+
+                <section class="form-section">
+
+                    <div class="section-header">
+
+                        <h2>
+                            Objetivo e atividade
+                        </h2>
+
+                        <p>
+                            Informe seu objetivo e sua rotina
+                            atual de atividade física.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <!-- NÍVEL DE ATIVIDADE -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.nivel_atividade.id_for_label }}">
+                                Nível de atividade
+                            </label>
+
+                            {{ form.nivel_atividade }}
+
+                            {% for error in form.nivel_atividade.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- OBJETIVO -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.objetivo.id_for_label }}">
+                                Objetivo
+                            </label>
+
+                            {{ form.objetivo }}
+
+                            {% for error in form.objetivo.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- REFEIÇÕES POR DIA -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.refeicoes_por_dia.id_for_label }}">
+                                Refeições por dia
+                            </label>
+
+                            {{ form.refeicoes_por_dia }}
+
+                            {% if form.refeicoes_por_dia.help_text %}
+                                <small class="help-text">
+                                    {{ form.refeicoes_por_dia.help_text }}
+                                </small>
+                            {% endif %}
+
+                            {% for error in form.refeicoes_por_dia.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- ORÇAMENTO -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.orcamento_semanal.id_for_label }}">
+                                Orçamento semanal
+                            </label>
+
+                            <div class="input-unidade input-dinheiro">
+
+                                <span class="prefixo">
+                                    R$
+                                </span>
+
+                                {{ form.orcamento_semanal }}
+
+                            </div>
+
+                            {% if form.orcamento_semanal.help_text %}
+                                <small class="help-text">
+                                    {{ form.orcamento_semanal.help_text }}
+                                </small>
+                            {% endif %}
+
+                            {% for error in form.orcamento_semanal.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================
+                     RESTRIÇÕES
+                ========================== -->
+
+                <section class="form-section">
+
+                    <div class="section-header">
+
+                        <h2>
+                            Preferências e restrições
+                        </h2>
+
+                        <p>
+                            Essas informações ajudam a evitar alimentos
+                            inadequados ao seu perfil.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <!-- RESTRIÇÃO -->
+
+                        <div class="form-group">
+
+                            <label for="{{ form.restricao_alimentar.id_for_label }}">
+                                Restrição alimentar
+                            </label>
+
+                            {{ form.restricao_alimentar }}
+
+                            {% for error in form.restricao_alimentar.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- OUTRA RESTRIÇÃO -->
+
+                        <div
+                            class="form-group"
+                            id="campo-outra-restricao"
+                        >
+
+                            <label for="{{ form.restricao_outra_descricao.id_for_label }}">
+                                Outra restrição
+                            </label>
+
+                            {{ form.restricao_outra_descricao }}
+
+                            {% if form.restricao_outra_descricao.help_text %}
+                                <small class="help-text">
+                                    {{ form.restricao_outra_descricao.help_text }}
+                                </small>
+                            {% endif %}
+
+                            {% for error in form.restricao_outra_descricao.errors %}
+                                <small class="erro-campo">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- ALERGIAS -->
+
+                    <div class="form-group campo-grande">
+
+                        <label for="{{ form.alergias.id_for_label }}">
+                            Alergias alimentares
+                        </label>
+
+                        {{ form.alergias }}
+
+                        {% if form.alergias.help_text %}
+                            <small class="help-text">
+                                {{ form.alergias.help_text }}
+                            </small>
+                        {% endif %}
+
+                        {% for error in form.alergias.errors %}
+                            <small class="erro-campo">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- ALIMENTOS QUE NÃO GOSTA -->
+
+                    <div class="form-group campo-grande">
+
+                        <label for="{{ form.alimentos_que_nao_gosta.id_for_label }}">
+                            Alimentos que prefere evitar
+                        </label>
+
+                        {{ form.alimentos_que_nao_gosta }}
+
+                        {% if form.alimentos_que_nao_gosta.help_text %}
+                            <small class="help-text">
+                                {{ form.alimentos_que_nao_gosta.help_text }}
+                            </small>
+                        {% endif %}
+
+                        {% for error in form.alimentos_que_nao_gosta.errors %}
+                            <small class="erro-campo">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================
+                     SAÚDE
+                ========================== -->
+
+                <section class="form-section">
+
+                    <div class="section-header">
+
+                        <h2>
+                            Informações de saúde
+                        </h2>
+
+                        <p>
+                            Informe condições relevantes para que
+                            as sugestões sejam mais adequadas.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-group campo-grande">
+
+                        <label for="{{ form.condicoes_saude.id_for_label }}">
+                            Condições de saúde
+                        </label>
+
+                        {{ form.condicoes_saude }}
+
+                        {% if form.condicoes_saude.help_text %}
+                            <small class="help-text">
+                                {{ form.condicoes_saude.help_text }}
+                            </small>
+                        {% endif %}
+
+                        {% for error in form.condicoes_saude.errors %}
+                            <small class="erro-campo">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- AVISO -->
+
+                <div class="aviso-dieta">
+
+                    <strong>
+                        Atenção
+                    </strong>
+
+                    <p>
+                        As sugestões geradas pelo sistema têm caráter
+                        informativo e não substituem acompanhamento
+                        profissional individualizado.
+                    </p>
+
+                </div>
+
+
+
+                <!-- BOTÕES -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'dieta:minhas_dietas' %}"
+                        class="btn-cancelar"
+                    >
+                        Cancelar
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn-principal"
+                    >
+                        Gerar dieta
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    const selectRestricao =
+        document.getElementById('id_restricao_alimentar');
+
+    const campoOutra =
+        document.getElementById('campo-outra-restricao');
+
+
+    function atualizarCampoRestricao() {
+
+        if (!selectRestricao || !campoOutra) {
+            return;
+        }
+
+        if (selectRestricao.value === 'outra') {
+
+            campoOutra.style.display = 'flex';
+
+        } else {
+
+            campoOutra.style.display = 'none';
+
+        }
+
+    }
+
+
+    atualizarCampoRestricao();
+
+
+    if (selectRestricao) {
+
+        selectRestricao.addEventListener(
+            'change',
+            atualizarCampoRestricao
+        );
+
+    }
+
+</script>
+
+{% endblock %}

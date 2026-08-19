@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Minhas dietas | PlanoFit</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/dieta.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<main class="pagina-dietas">
+
+    <div class="dietas-container">
+
+        <!-- BOTÃO VOLTAR -->
+
+        <div class="area-voltar">
+            <a
+                href="{% url 'monitoramento:dashboard' %}"
+                class="btn-voltar"
+            >
+                ← Voltar
+            </a>
+        </div>
+
+
+        <!-- CABEÇALHO -->
+
+        <header class="pagina-header">
+
+            <div>
+
+                <span class="pagina-tag">
+                    PlanoFit
+                </span>
+
+                <h1>Minhas dietas</h1>
+
+                <p>
+                    Consulte os planos alimentares personalizados
+                    gerados a partir dos seus perfis.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'dieta:criar_perfil' %}"
+                class="btn-principal"
+            >
+                + Nova dieta
+            </a>
+
+        </header>
+
+
+        <!-- LISTA DE DIETAS -->
+
+        {% if dietas %}
+
+            <div class="dietas-grid">
+
+                {% for dieta in dietas %}
+
+                    <article class="dieta-card">
+
+
+                        <!-- TOPO DO CARD -->
+
+                        <div class="dieta-card-topo">
+
+                            <div class="dieta-icone">
+                                {{ forloop.counter|stringformat:"02d" }}
+                            </div>
+
+
+                            <div class="dieta-info">
+
+                                <span class="dieta-label">
+                                    Plano alimentar personalizado
+                                </span>
+
+                                <h2>
+                                    Dieta #{{ forloop.counter }}
+                                </h2>
+
+                                <span class="dieta-data">
+                                    Gerada em
+                                    {{ dieta.criado_em|date:"d/m/Y" }}
+                                    às
+                                    {{ dieta.criado_em|date:"H:i" }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- INFORMAÇÕES DO PERFIL -->
+
+                        <div class="dieta-detalhes">
+
+                            <div class="detalhe">
+
+                                <span>Objetivo</span>
+
+                                <strong>
+                                    {{ dieta.perfil.get_objetivo_display }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detalhe">
+
+                                <span>Atividade</span>
+
+                                <strong>
+                                    {{ dieta.perfil.get_nivel_atividade_display }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detalhe">
+
+                                <span>Refeições</span>
+
+                                <strong>
+                                    {{ dieta.perfil.refeicoes_por_dia }}
+                                    por dia
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detalhe">
+
+                                <span>Restrição</span>
+
+                                <strong>
+                                    {{ dieta.perfil.get_restricao_alimentar_display }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- METAS NUTRICIONAIS -->
+
+                        <div class="metas-dieta">
+
+                            <div class="meta-item">
+
+                                <span>Calorias</span>
+
+                                <strong>
+                                    {{ dieta.calorias_alvo }}
+                                </strong>
+
+                                <small>kcal</small>
+
+                            </div>
+
+
+                            <div class="meta-item">
+
+                                <span>Proteína</span>
+
+                                <strong>
+                                    {{ dieta.proteina_g }}
+                                </strong>
+
+                                <small>g</small>
+
+                            </div>
+
+
+                            <div class="meta-item">
+
+                                <span>Carboidrato</span>
+
+                                <strong>
+                                    {{ dieta.carboidrato_g }}
+                                </strong>
+
+                                <small>g</small>
+
+                            </div>
+
+
+                            <div class="meta-item">
+
+                                <span>Gordura</span>
+
+                                <strong>
+                                    {{ dieta.gordura_g }}
+                                </strong>
+
+                                <small>g</small>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- AÇÕES -->
+
+                        <div class="dieta-card-acoes">
+
+                            <a
+                                href="{% url 'dieta:ver_dieta' dieta.id %}"
+                                class="btn-ver-dieta"
+                            >
+                                Ver dieta
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- CASO NÃO TENHA NENHUMA DIETA -->
+
+            <section class="estado-vazio">
+
+                <div class="estado-vazio-icone">
+                    +
+                </div>
+
+                <h2>
+                    Você ainda não possui dietas
+                </h2>
+
+                <p>
+                    Preencha seu perfil alimentar para gerar
+                    uma dieta personalizada de acordo com seus
+                    objetivos e preferências.
+                </p>
+
+                <a
+                    href="{% url 'dieta:criar_perfil' %}"
+                    class="btn-principal"
+                >
+                    Criar minha primeira dieta
+                </a>
+
+            </section>
+
+        {% endif %}
+
+    </div>
+
+</main>
+
+{% endblock %}

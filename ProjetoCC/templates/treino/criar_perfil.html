@@ -5,6 +5,53 @@
     <link rel="stylesheet" href="{% static 'css/criar_perfil.css' %}">
 {% endblock %}
 
+{% block nav %}
+
+<nav>
+
+    <a
+        href="{% url 'monitoramento:dashboard' %}"
+        class="navbar-brand"
+    >
+        PlanoFit
+    </a>
+
+    <form
+        method="POST"
+        action="{% url 'logout' %}"
+        class="form-logout"
+    >
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="botao-logout"
+        >
+            Sair
+        </button>
+
+    </form>
+
+    <a href="{% url 'perfil' %}">
+        Perfil
+    </a>
+
+    <a href="{% url 'treino:meus_treinos' %}">
+        Meus treinos
+    </a>
+
+    <a href="{% url 'dieta:minhas_dietas' %}">
+        Minhas dietas
+    </a>
+
+    <a href="{% url 'treino:biblioteca' %}">
+        Biblioteca
+    </a>
+
+</nav>
+
+{% endblock %}
+
 {% block title %}
     <title>Criar ficha de treino | PlanoFit</title>
 {% endblock %}

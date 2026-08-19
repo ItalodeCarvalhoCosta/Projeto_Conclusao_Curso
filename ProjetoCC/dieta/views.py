@@ -1,107 +1,64 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .calculos import calcular_meta_nutricional, DadosIncompletos
-from .forms import PlanoAlimentarForm, RefeicaoForm
-from .models import PlanoAlimentar, Refeicao
+from django.contrib import messages
+
+from .forms import PerfilDietaForm
+from .models import PerfilDieta, DietaPersonalizada
+from .ia import gerar_dieta_ia
 
 
 @login_required
-def meu_plano(request):
-    plano = PlanoAlimentar.objects.filter(usuario=request.user).first()
+def criar_perfil_dieta(request):
+    """Formulário com peso, altura, objetivo, alergias, orçamento, etc."""
+    if request.method == 'POST':
+        form = PerfilDietaForm(request.POST)
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.usuario = request.user
+            perfil.save()
+            return redirect('dieta:gerar_dieta', perfil_id=perfil.id)
+    else:
+        form = PerfilDietaForm()
 
-    if not plano:
-        return redirect('dieta:criar_plano')
-
-    refeicoes = plano.refeicoes.all()
-
-    totais = {
-        'calorias': sum(r.calorias for r in refeicoes),
-        'proteina': sum(r.proteina for r in refeicoes),
-        'carboidrato': sum(r.carboidrato for r in refeicoes),
-        'gordura': sum(r.gordura for r in refeicoes),
-    }
-
-    return render(request, 'dieta/plano.html', {
-        'plano': plano,
-        'refeicoes': refeicoes,
-        'totais': totais,
-    })
+    return render(request, 'dieta/criar_perfil.html', {'form': form})
 
 
 @login_required
-def criar_plano(request):
-    ultimo_registro = request.user.monitoramentos.exclude(peso__isnull=True).first()
-    peso_atual = ultimo_registro.peso if ultimo_registro else None
+def gerar_dieta(request, perfil_id):
+    """
+    Calcula as metas nutricionais e chama a IA (ia.py) para montar o
+    cardápio; salva tudo em DietaPersonalizada.
+    """
+    perfil = get_object_or_404(PerfilDieta, id=perfil_id, usuario=request.user)
 
     try:
-        sugestao = calcular_meta_nutricional(request.user, peso_atual)
-        erro = None
-    except DadosIncompletos as e:
-        sugestao = None
-        erro = str(e)
+        metas, texto, dados_json = gerar_dieta_ia(perfil)
+    except Exception:
+        messages.error(
+            request,
+            'Não foi possível gerar a dieta agora. Tente novamente em instantes.'
+        )
+        return redirect('dieta:criar_perfil')
 
-    if request.method == 'POST':
-        form = PlanoAlimentarForm(request.POST)
-        if form.is_valid():
-            plano = form.save(commit=False)
-            plano.usuario = request.user
-            plano.save()
-            return redirect('dieta:meu_plano')
-    else:
-        initial = {}
-        if sugestao:
-            initial = {
-                'calorias_meta': sugestao['calorias'],
-                'proteina_meta': sugestao['proteina'],
-                'carboidrato_meta': sugestao['carboidrato'],
-                'gordura_meta': sugestao['gordura'],
-            }
-        form = PlanoAlimentarForm(initial=initial)
-
-    return render(request, 'dieta/criar_plano.html', {
-        'form': form,
-        'sugestao': sugestao,
-        'erro': erro,
-    })
+    dieta = DietaPersonalizada.objects.create(
+        perfil=perfil,
+        calorias_alvo=metas['calorias_alvo'],
+        proteina_g=metas['proteina_g'],
+        carboidrato_g=metas['carboidrato_g'],
+        gordura_g=metas['gordura_g'],
+        conteudo_texto=texto,
+        conteudo_json=dados_json,
+    )
+    return redirect('dieta:ver_dieta', dieta_id=dieta.id)
 
 
 @login_required
-def criar_refeicao(request):
-    plano = get_object_or_404(PlanoAlimentar, usuario=request.user)
-
-    if request.method == 'POST':
-        form = RefeicaoForm(request.POST)
-        if form.is_valid():
-            refeicao = form.save(commit=False)
-            refeicao.plano = plano
-            refeicao.save()
-            return redirect('dieta:meu_plano')
-    else:
-        form = RefeicaoForm()
-
-    return render(request, 'dieta/criar_refeicao.html', {'form': form, 'plano': plano})
+def ver_dieta(request, dieta_id):
+    dieta = get_object_or_404(DietaPersonalizada, id=dieta_id, perfil__usuario=request.user)
+    return render(request, 'dieta/ver_dieta.html', {'dieta': dieta})
 
 
 @login_required
-def editar_refeicao(request, pk):
-    refeicao = get_object_or_404(Refeicao, pk=pk, plano__usuario=request.user)
-
-    if request.method == 'POST':
-        form = RefeicaoForm(request.POST, instance=refeicao)
-        if form.is_valid():
-            form.save()
-            return redirect('dieta:meu_plano')
-    else:
-        form = RefeicaoForm(instance=refeicao)
-
-    return render(request, 'dieta/criar_refeicao.html', {'form': form, 'plano': refeicao.plano, 'editando': True})
-
-
-@login_required
-def excluir_refeicao(request, pk):
-    refeicao = get_object_or_404(Refeicao, pk=pk, plano__usuario=request.user)
-
-    if request.method == 'POST':
-        refeicao.delete()
-
-    return redirect('dieta:meu_plano')
+def minhas_dietas(request):
+    dietas = DietaPersonalizada.objects.filter(perfil__usuario=request.user)
+    return render(request, 'dieta/minhas_dietas.html', {'dietas': dietas})

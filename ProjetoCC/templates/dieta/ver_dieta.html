@@ -1,0 +1,663 @@
+```html
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>Minha dieta | PlanoFit</title>
+{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/dieta.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<main class="pagina-dieta">
+
+    <div class="dieta-container">
+
+
+        <!-- =========================
+             VOLTAR
+        ========================== -->
+
+        <div class="area-voltar">
+
+            <a
+                href="{% url 'dieta:minhas_dietas' %}"
+                class="btn-voltar"
+            >
+                ← Voltar
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             CABEÇALHO
+        ========================== -->
+
+        <header class="pagina-header">
+
+            <div>
+
+                <span class="pagina-tag">
+                    Plano alimentar personalizado
+                </span>
+
+                <h1>
+                    Minha dieta
+                </h1>
+
+                <p>
+                    Plano gerado em
+                    {{ dieta.criado_em|date:"d/m/Y" }}
+                    às
+                    {{ dieta.criado_em|date:"H:i" }}.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'dieta:criar_perfil' %}"
+                class="btn-secundario"
+            >
+                Gerar nova dieta
+            </a>
+
+        </header>
+
+
+        <!-- =========================
+             RESUMO DO PERFIL
+        ========================== -->
+
+        <section class="resumo-dieta">
+
+            <div class="resumo-item">
+
+                <span>
+                    Objetivo
+                </span>
+
+                <strong>
+                    {{ dieta.perfil.get_objetivo_display }}
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-item">
+
+                <span>
+                    Nível de atividade
+                </span>
+
+                <strong>
+                    {{ dieta.perfil.get_nivel_atividade_display }}
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-item">
+
+                <span>
+                    Refeições
+                </span>
+
+                <strong>
+                    {{ dieta.perfil.refeicoes_por_dia }}
+                    por dia
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-item">
+
+                <span>
+                    Restrição
+                </span>
+
+                <strong>
+                    {{ dieta.perfil.get_restricao_alimentar_display }}
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             METAS NUTRICIONAIS
+        ========================== -->
+
+        <section class="metas-section">
+
+            <div class="section-header">
+
+                <span class="pagina-tag">
+                    Meta diária
+                </span>
+
+                <h2>
+                    Metas nutricionais
+                </h2>
+
+                <p>
+                    Valores calculados para o seu perfil e objetivo.
+                </p>
+
+            </div>
+
+
+            <div class="metas-grid">
+
+
+                <article class="meta-card">
+
+                    <span>
+                        Calorias
+                    </span>
+
+                    <div>
+                        <strong>
+                            {{ dieta.calorias_alvo }}
+                        </strong>
+
+                        <small>
+                            kcal
+                        </small>
+                    </div>
+
+                </article>
+
+
+                <article class="meta-card">
+
+                    <span>
+                        Proteína
+                    </span>
+
+                    <div>
+                        <strong>
+                            {{ dieta.proteina_g }}
+                        </strong>
+
+                        <small>
+                            g
+                        </small>
+                    </div>
+
+                </article>
+
+
+                <article class="meta-card">
+
+                    <span>
+                        Carboidratos
+                    </span>
+
+                    <div>
+                        <strong>
+                            {{ dieta.carboidrato_g }}
+                        </strong>
+
+                        <small>
+                            g
+                        </small>
+                    </div>
+
+                </article>
+
+
+                <article class="meta-card">
+
+                    <span>
+                        Gorduras
+                    </span>
+
+                    <div>
+                        <strong>
+                            {{ dieta.gordura_g }}
+                        </strong>
+
+                        <small>
+                            g
+                        </small>
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CARDÁPIO GERADO
+        ========================== -->
+
+        {% if dieta.conteudo_json and dieta.conteudo_json.refeicoes %}
+
+            <section class="cardapio-section">
+
+                <div class="section-header">
+
+                    <span class="pagina-tag">
+                        Cardápio
+                    </span>
+
+                    <h2>
+                        Refeições do dia
+                    </h2>
+
+                    <p>
+                        Sugestão de distribuição das refeições
+                        ao longo do dia.
+                    </p>
+
+                </div>
+
+
+                <div class="refeicoes-lista">
+
+
+                    {% for refeicao in dieta.conteudo_json.refeicoes %}
+
+                        <article class="refeicao-card">
+
+
+                            <!-- CABEÇALHO DA REFEIÇÃO -->
+
+                            <header class="refeicao-header">
+
+                                <div class="refeicao-numero">
+                                    {{ forloop.counter }}
+                                </div>
+
+
+                                <div class="refeicao-titulo">
+
+                                    <span>
+                                        Refeição {{ forloop.counter }}
+                                    </span>
+
+                                    <h2>
+                                        {{ refeicao.nome }}
+                                    </h2>
+
+                                </div>
+
+
+                                {% if refeicao.horario_sugerido %}
+
+                                    <div class="refeicao-horario">
+
+                                        <span>
+                                            Horário sugerido
+                                        </span>
+
+                                        <strong>
+                                            {{ refeicao.horario_sugerido }}
+                                        </strong>
+
+                                    </div>
+
+                                {% endif %}
+
+
+                                {% if refeicao.calorias_refeicao %}
+
+                                    <div class="refeicao-calorias">
+
+                                        <span>
+                                            Calorias
+                                        </span>
+
+                                        <strong>
+                                            {{ refeicao.calorias_refeicao }}
+                                            kcal
+                                        </strong>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </header>
+
+
+                            <!-- ALIMENTOS -->
+
+                            {% if refeicao.alimentos %}
+
+                                <div class="alimentos-lista">
+
+
+                                    <div class="alimentos-header">
+
+                                        <span>
+                                            Alimento
+                                        </span>
+
+                                        <span>
+                                            Quantidade
+                                        </span>
+
+                                        <span>
+                                            Calorias
+                                        </span>
+
+                                    </div>
+
+
+                                    {% for alimento in refeicao.alimentos %}
+
+                                        <div class="alimento-item">
+
+                                            <div class="alimento-nome">
+
+                                                <span class="alimento-numero">
+                                                    {{ forloop.counter }}
+                                                </span>
+
+                                                <strong>
+                                                    {{ alimento.item }}
+                                                </strong>
+
+                                            </div>
+
+
+                                            <span class="alimento-quantidade">
+                                                {{ alimento.quantidade }}
+                                            </span>
+
+
+                                            <span class="alimento-calorias">
+
+                                                {% if alimento.calorias %}
+
+                                                    {{ alimento.calorias }}
+                                                    kcal
+
+                                                {% else %}
+
+                                                    --
+
+                                                {% endif %}
+
+                                            </span>
+
+                                        </div>
+
+                                    {% endfor %}
+
+
+                                </div>
+
+                            {% else %}
+
+                                <p class="sem-dados">
+                                    Nenhum alimento encontrado nesta refeição.
+                                </p>
+
+                            {% endif %}
+
+
+                        </article>
+
+                    {% endfor %}
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 RESUMO DA IA
+            ========================== -->
+
+            {% if dieta.conteudo_json.resumo_diario %}
+
+                <section class="resumo-gerado">
+
+                    <div class="section-header">
+
+                        <span class="pagina-tag">
+                            Resumo
+                        </span>
+
+                        <h2>
+                            Totais do dia
+                        </h2>
+
+                    </div>
+
+
+                    <div class="resumo-gerado-grid">
+
+
+                        <div>
+
+                            <span>
+                                Calorias
+                            </span>
+
+                            <strong>
+                                {{ dieta.conteudo_json.resumo_diario.calorias }}
+                                kcal
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Proteína
+                            </span>
+
+                            <strong>
+                                {{ dieta.conteudo_json.resumo_diario.proteina_g }}
+                                g
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Carboidratos
+                            </span>
+
+                            <strong>
+                                {{ dieta.conteudo_json.resumo_diario.carboidrato_g }}
+                                g
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Gorduras
+                            </span>
+
+                            <strong>
+                                {{ dieta.conteudo_json.resumo_diario.gordura_g }}
+                                g
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+            {% endif %}
+
+
+            <!-- =========================
+                 CUSTO
+            ========================== -->
+
+            {% if dieta.conteudo_json.estimativa_custo_semanal %}
+
+                <section class="custo-card">
+
+                    <div>
+
+                        <span class="pagina-tag">
+                            Orçamento
+                        </span>
+
+                        <h2>
+                            Estimativa de custo semanal
+                        </h2>
+
+                    </div>
+
+                    <strong class="valor-custo">
+                        {{ dieta.conteudo_json.estimativa_custo_semanal }}
+                    </strong>
+
+                </section>
+
+            {% endif %}
+
+
+            <!-- =========================
+                 OBSERVAÇÕES
+            ========================== -->
+
+            {% if dieta.conteudo_json.observacoes %}
+
+                <section class="observacoes-card">
+
+                    <div class="observacoes-titulo">
+
+                        <div class="observacoes-icone">
+                            !
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Importante
+                            </span>
+
+                            <h2>
+                                Orientações gerais
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <p>
+                        {{ dieta.conteudo_json.observacoes }}
+                    </p>
+
+                </section>
+
+            {% endif %}
+
+
+        {% else %}
+
+
+            <!-- =========================
+                 FALLBACK
+            ========================== -->
+
+            <section class="estado-vazio">
+
+                <h2>
+                    Não foi possível exibir o plano formatado
+                </h2>
+
+                <p>
+                    O cardápio estruturado não está disponível.
+                    A resposta original gerada está abaixo.
+                </p>
+
+
+                {% if dieta.conteudo_texto %}
+
+                    <div class="texto-bruto">
+                        {{ dieta.conteudo_texto|linebreaks }}
+                    </div>
+
+                {% else %}
+
+                    <p>
+                        Não há conteúdo disponível para esta dieta.
+                    </p>
+
+                {% endif %}
+
+            </section>
+
+        {% endif %}
+
+
+        <!-- =========================
+             AVISO
+        ========================== -->
+
+        <section class="aviso-dieta">
+
+            <strong>
+                Atenção
+            </strong>
+
+            <p>
+                Este plano alimentar é uma sugestão gerada com base
+                nas informações fornecidas e não substitui avaliação
+                e acompanhamento individualizado por profissional
+                habilitado.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             AÇÕES FINAIS
+        ========================== -->
+
+        <div class="acoes-finais">
+
+            <a
+                href="{% url 'dieta:minhas_dietas' %}"
+                class="btn-secundario"
+            >
+                Ver minhas dietas
+            </a>
+
+            <a
+                href="{% url 'dieta:criar_perfil' %}"
+                class="btn-principal"
+            >
+                Gerar nova dieta
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+{% endblock %}
+```

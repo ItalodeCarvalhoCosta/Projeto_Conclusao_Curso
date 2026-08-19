@@ -1,17 +1,24 @@
 from django import forms
-from .models import PlanoAlimentar, Refeicao
+from .models import PerfilDieta
 
 
-class PlanoAlimentarForm(forms.ModelForm):
+class PerfilDietaForm(forms.ModelForm):
     class Meta:
-        model = PlanoAlimentar
-        fields = ('nome', 'calorias_meta', 'proteina_meta', 'carboidrato_meta', 'gordura_meta')
-
-
-class RefeicaoForm(forms.ModelForm):
-    class Meta:
-        model = Refeicao
-        fields = ('tipo', 'descricao', 'calorias', 'proteina', 'carboidrato', 'gordura')
+        model = PerfilDieta
+        exclude = ['usuario', 'criado_em', 'atualizado_em']
         widgets = {
-            'descricao': forms.Textarea(attrs={'rows': 3}),
+            'alergias': forms.Textarea(attrs={'rows': 2}),
+            'alimentos_que_nao_gosta': forms.Textarea(attrs={'rows': 2}),
+            'condicoes_saude': forms.Textarea(attrs={'rows': 2}),
         }
+
+    def clean(self):
+        cleaned = super().clean()
+        restricao = cleaned.get('restricao_alimentar')
+        descricao = cleaned.get('restricao_outra_descricao')
+        if restricao == 'outra' and not descricao:
+            self.add_error(
+                'restricao_outra_descricao',
+                'Descreva a restrição alimentar.'
+            )
+        return cleaned
